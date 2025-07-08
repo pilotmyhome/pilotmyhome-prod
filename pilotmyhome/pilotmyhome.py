@@ -1,13 +1,15 @@
 import reflex as rx
 from datetime import datetime
+from typing import List, Dict
 
 # -----------------------------------------------------------------------------
 # App State
 # -----------------------------------------------------------------------------
 class State(rx.State):
     """The application state."""
-    
-    product_hubs = {
+
+    # Added type annotations to fix deployment error
+    product_hubs: Dict[str, List[Dict[str, str]]] = {
         "peaceful_home": [
             {
                 "title": "Ring Battery Doorbell with Head‑to‑Toe Video – Satin Nickel",
@@ -73,7 +75,8 @@ class State(rx.State):
         ]
     }
     
-    guide_products = {
+    # Added type annotations to fix deployment error
+    guide_products: Dict[str, List[Dict[str, str]]] = {
         "security": [
             {
                 "title": "Ring Battery Doorbell with Head‑to‑Toe Video – Satin Nickel",
@@ -229,7 +232,7 @@ def guide_security() -> rx.Component:
         rx.vstack(
             rx.heading("A Christian Family's Guide to Home Security",
                        size="8", text_align="center"),
-            rx.text(f"Published July {datetime.now().day}, {datetime.now().year}", color_scheme="gray", text_align="center"),
+            rx.text(f"Published {datetime.now().strftime('%B %d, %Y')}", color_scheme="gray", text_align="center"),
             rx.text(
                 "Feeling secure in our homes is not just about technology; it's about creating a sanctuary of peace for our family. In this guide, we discuss how modern tools can help us be good stewards of that peace. We'll look at video doorbells, cameras, and locks from a parent's perspective.",
                 padding_y="2em", max_width="800px",
