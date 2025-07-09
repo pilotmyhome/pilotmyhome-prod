@@ -29,7 +29,7 @@ PyYAML==6.0.2
 redis==6.2.0
 reflex==0.8.1
 reflex-hosting-cli==0.1.51
-reflex-web
+reflex-radix-chakra
 rich==14.0.0
 simple-websocket==1.1.0
 sniffio==1.3.1

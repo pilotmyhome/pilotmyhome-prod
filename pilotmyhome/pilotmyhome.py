@@ -2,12 +2,8 @@ import reflex as rx
 from datetime import datetime
 from typing import List, Dict
 
-# Direct imports for Chakra components
-from reflex.components.chakra.layout import Box, Flex, VStack
-from reflex.components.chakra.typography import Heading, Text
-from reflex.components.chakra.navigation import Link
-from reflex.components.chakra.forms import Button
-from reflex.components.chakra.media import Image
+# Correct imports for Chakra components in Reflex v0.8.1
+from radix_chakra import vstack, box, heading, text, button, flex, image, link
 
 # -----------------------------------------------------------------------------
 # App State
@@ -105,13 +101,13 @@ class State(rx.State):
 # Reusable Components
 # -----------------------------------------------------------------------------
 def product_card(product: dict):
-    return Link(
-        VStack(
-            Image(src=product["image_url"], alt=product["title"],
+    return link(
+        vstack(
+            image(src=product["image_url"], alt=product["title"],
                      height="150px", width="auto", object_fit="contain"),
-            Text(product["title"], height="5em",
+            text(product["title"], height="5em",
                     text_align="center", font_weight="500", size="3"),
-            Button("View on Amazon", width="100%"),
+            button("View on Amazon", width="100%"),
             spacing="4", align="center"),
         href=product["affiliate_link"], is_external=True,
         text_decoration="none", color_scheme="gray",
@@ -120,12 +116,12 @@ def product_card(product: dict):
         _hover={"box_shadow": "0px 4px 20px rgba(0,0,0,0.1)"}
     )
 
-def hub_section(title: str, text: str, products: list[dict]):
-    return VStack(
-        Heading(title, size="7"),
-        Text(text, max_width="600px",
+def hub_section(title: str, text_content: str, products: list[dict]):
+    return vstack(
+        heading(title, size="7"),
+        text(text_content, max_width="600px",
                 text_align="center", color_scheme="gray"),
-        Flex(
+        flex(
             rx.foreach(products, product_card),
             spacing="5", padding_y="2em",
             wrap="wrap", justify="center"
@@ -135,17 +131,17 @@ def hub_section(title: str, text: str, products: list[dict]):
     )
 
 def footer():
-    return VStack(
-        Text("As an Amazon Associate, I earn from qualifying purchases.",
+    return vstack(
+        text("As an Amazon Associate, I earn from qualifying purchases.",
                 color_scheme="gray", font_style="italic", size="2"),
-        Text(f"© {datetime.now().year} Pilot My Home"),
+        text(f"© {datetime.now().year} Pilot My Home"),
         align="center", spacing="2",
         padding="2em", width="100%",
         background_color="#FAFAFA"
     )
 
 def base_layout(child: rx.Component):
-    return VStack(child, footer(), spacing="0", width="100%")
+    return vstack(child, footer(), spacing="0", width="100%")
 
 
 # -----------------------------------------------------------------------------
@@ -154,17 +150,17 @@ def base_layout(child: rx.Component):
 @rx.page(route="/", title="Pilot My Home | Abundant Living with Technology")
 def index() -> rx.Component:
     return base_layout(
-        VStack(
+        vstack(
             # Hero Section
-            Box(
-                VStack(
-                    Heading("Steer Your Home Towards Abundance",
+            box(
+                vstack(
+                    heading("Steer Your Home Towards Abundance",
                                size="9", color="white"),
-                    Text(
+                    text(
                         "Guiding Christian families to live more peacefully and purposefully with today's technology.",
                         size="5", color="white"),
-                    Link(
-                        Button("Explore Our Guides", size="3", margin_top="1em", width="100%"),
+                    link(
+                        button("Explore Our Guides", size="3", margin_top="1em", width="100%"),
                         href="/guides",
                         text_decoration="none",
                     ),
@@ -178,9 +174,9 @@ def index() -> rx.Component:
             ),
 
             # Mission Section
-            VStack(
-                Heading("Faith, Family, and the Thoughtful Home", size="7"),
-                Text(
+            vstack(
+                heading("Faith, Family, and the Thoughtful Home", size="7"),
+                text(
                     "Welcome to Pilot My Home. We believe technology shouldn't complicate life, but enrich it. We're here to help you navigate the world of smart home tech to create more time for what truly matters: your family and your faith. Let's build a home of peace and purpose, together.",
                     max_width="700px", text_align="center"
                 ),
@@ -217,10 +213,10 @@ def index() -> rx.Component:
 @rx.page(route="/guides", title="Guides | Pilot My Home")
 def guides() -> rx.Component:
     return base_layout(
-        VStack(
-            Heading("Our Guides", size="8"),
-            Text("In-depth resources to help you build a more thoughtful home."),
-            Link("A Christian Family's Guide to Home Security & Peace of Mind",
+        vstack(
+            heading("Our Guides", size="8"),
+            text("In-depth resources to help you build a more thoughtful home."),
+            link("A Christian Family's Guide to Home Security & Peace of Mind",
                     href="/guides/security"),
             spacing="5", padding="4em", align="center"
         )
@@ -229,17 +225,17 @@ def guides() -> rx.Component:
 @rx.page(route="/guides/security", title="Home Security Guide | Pilot My Home")
 def guide_security() -> rx.Component:
     return base_layout(
-        VStack(
-            Heading("A Christian Family's Guide to Home Security",
+        vstack(
+            heading("A Christian Family's Guide to Home Security",
                        size="8", text_align="center"),
-            Text(f"Published {datetime.now().strftime('%B %d, %Y')}", color_scheme="gray", text_align="center"),
-            Text(
+            text(f"Published {datetime.now().strftime('%B %d, %Y')}", color_scheme="gray", text_align="center"),
+            text(
                 "Feeling secure in our homes is not just about technology; it's about creating a sanctuary of peace for our family. In this guide, we discuss how modern tools can help us be good stewards of that peace. We'll look at video doorbells, cameras, and locks from a parent's perspective.",
                 padding_y="2em", max_width="800px",
             ),
-            Heading("Our Top Recommended Security Products",
+            heading("Our Top Recommended Security Products",
                        size="6", padding_top="1em"),
-            Flex(
+            flex(
                 rx.foreach(State.guide_products["security"], product_card),
                 spacing="5", padding_y="2em",
                 wrap="wrap", justify="center"
