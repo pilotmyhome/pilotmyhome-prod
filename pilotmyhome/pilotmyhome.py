@@ -229,18 +229,36 @@ def guide_security() -> rx.Component:
             rx.heading("A Christian Family's Guide to Home Security",
                        size="8", text_align="center"),
             rx.text(f"Published {datetime.now().strftime('%B %d, %Y')}", color="var(--gray-10)", text_align="center"),
-            rx.text(
-                "Feeling secure in our homes is not just about technology; it's about creating a sanctuary of peace for our family. In this guide, we discuss how modern tools can help us be good stewards of that peace. We'll look at video doorbells, cameras, and locks from a parent's perspective.",
-                padding_y="2em", max_width="800px",
+            
+            # --- NEW CONTENT BEGINS HERE ---
+            rx.vstack(
+                rx.text(
+                    "Our homes are our sanctuaries—a gift we are called to steward wisely. In today's world, that stewardship includes being thoughtful about security. This isn't about living in fear, but about creating an environment of peace and safety where your family can flourish. Modern technology, when chosen and used intentionally, can be a powerful tool in piloting a secure and peaceful home."
+                ),
+                rx.heading("The Digital Welcome Mat: Video Doorbells", size="6", padding_top="1em"),
+                rx.text(
+                    "The front door is the primary entry point to your home. A video doorbell acts as a digital gatekeeper, allowing you to see and speak with anyone who approaches, whether you're in the kitchen or away from home. This brings incredible peace of mind, from verifying a delivery to politely declining a solicitor without opening the door. It's a simple first step towards a more secure home."
+                ),
+                rx.heading("Your Watchful Eyes: Outdoor Cameras", size="6", padding_top="1em"),
+                rx.text(
+                    "For a broader view of your property, outdoor security cameras provide another layer of reassurance. They allow you to check on children playing in the yard, monitor your property at night, and keep a record of any unusual activity. Modern wireless cameras are simple to install and offer features like motion alerts sent directly to your phone, so you are always aware of what's happening at home."
+                ),
+                rx.heading("A Note on Digital Stewardship", size="6", padding_top="1em"),
+                rx.text(
+                    "As we bring these tools into our homes, it's also our responsibility to be good digital stewards. Always secure your devices with strong, unique passwords and enable two-factor authentication (2FA) whenever possible. This ensures that the technology meant to protect your family is itself protected."
+                ),
+                spacing="4"
             ),
+            # --- NEW CONTENT ENDS HERE ---
+
             rx.heading("Our Top Recommended Security Products",
-                       size="6", padding_top="1em"),
+                       size="6", padding_top="2em"),
             rx.flex(
                 rx.foreach(State.guide_products["security"], product_card),
                 spacing="5", padding_y="2em",
                 wrap="wrap", justify="center"
             ),
-            max_width="90%", padding="2em", spacing="4", align="center"
+            max_width="900px", padding="2em", spacing="4", align="center"
         )
     )
 
@@ -253,4 +271,4 @@ app = rx.App(
         accent_color="sky",
         radius="large",
     ),
-) 
+)
