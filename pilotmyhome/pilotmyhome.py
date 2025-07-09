@@ -91,23 +91,6 @@ class State(rx.State):
                 "image_url": "https://m.media-amazon.com/images/I/61Vd6v-0gmL._AC_SL1500_.jpg",
                 "affiliate_link": "https://www.amazon.com/eufy-Security-S220-SoloCam-Spotlight/dp/B09T92N52N?tag=pilotmyhome-20"
             },
-        ],
-        "stewardship": [
-            {
-                "title": "roborock Q7 M5 Robot Vacuum and Mop Combo, 10 000 Pa HyperForce",
-                "image_url": "https://m.media-amazon.com/images/I/7162dbcZW3L._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/roborock-Q7-M5-Anti-Tangle-APP-Controlled/dp/B0DSJ93KPD?tag=pilotmyhome-20"
-            },
-            {
-                "title": "Instant Pot Duo Crisp 11‑in‑1 Air Fryer & Pressure Cooker, 6 Qt",
-                "image_url": "https://m.media-amazon.com/images/I/81vc3qXKPpL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Instant-Pot-Multi-Use-Pressure-Cooker/dp/B08WCLJ7JG?tag=pilotmyhome-20"
-            },
-            {
-                "title": "Amazon Echo Dot (5th Gen, 2022 Release) Glacier White",
-                "image_url": "https://m.media-amazon.com/images/I/7116ea3BmTL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Amazon-release-vibrant-helpful-routines/dp/B09B94RL1R?tag=pilotmyhome-20"
-            },
         ]
     }
 
@@ -176,7 +159,7 @@ def index() -> rx.Component:
                     rx.heading("Pilot Your Home Towards Abundance",
                                size="9", color="white"),
                     rx.text(
-                        "Guiding Christian families to live more peacefully and intentionally with today's technology.",
+                        "Guiding Christian families to live more peacefully and intentionally with today's technology but God setting the weather and the traffic control.",
                         size="5", color="white"),
                     rx.link(
                         rx.button("Explore Our Guides", size="3", margin_top="1em"),
@@ -235,7 +218,6 @@ def guides() -> rx.Component:
             rx.text("In-depth resources to help you build a more thoughtful home."),
             rx.link("A Christian Family's Guide to Home Security & Peace of Mind",
                     href="/guides/security"),
-            rx.link("Good Stewardship of Time: A Guide", href="/guides/stewardship"),
             spacing="5", padding="4em", align="center"
         )
     )
@@ -247,7 +229,6 @@ def guide_security() -> rx.Component:
             rx.heading("A Christian Family's Guide to Home Security",
                        size="8", text_align="center"),
             rx.text(f"Published {datetime.now().strftime('%B %d, %Y')}", color="var(--gray-10)", text_align="center"),
-            
             rx.vstack(
                 rx.text(
                     "Our homes are our sanctuaries—a gift we are called to steward wisely. In today's world, that stewardship includes being thoughtful about security. This isn't about living in fear, but about creating an environment of peace and safety where your family can flourish. Modern technology, when chosen and used intentionally, can be a powerful tool in piloting a secure and peaceful home."
@@ -312,7 +293,6 @@ def guide_stewardship() -> rx.Component:
             max_width="90%", padding="2em", spacing="4", align="center"
         )
     )
-
 # -----------------------------------------------------------------------------
 # App Initialization
 # -----------------------------------------------------------------------------
