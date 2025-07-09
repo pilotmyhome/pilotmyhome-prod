@@ -159,7 +159,7 @@ def index() -> rx.Component:
                     rx.heading("Pilot Your Home Towards Abundance",
                                size="9", color="white"),
                     rx.text(
-                        "Guiding Christian families to live more peacefully and purposefully with today's technology.",
+                        "Guiding Christian families to live more peacefully and intentionally with today's technology.",
                         size="5", color="white"),
                     rx.link(
                         rx.button("Explore Our Guides", size="3", margin_top="1em"),
@@ -253,4 +253,4 @@ app = rx.App(
         accent_color="sky",
         radius="large",
     ),
-)
+) 
