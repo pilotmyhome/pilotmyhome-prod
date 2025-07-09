@@ -2,6 +2,13 @@ import reflex as rx
 from datetime import datetime
 from typing import List, Dict
 
+# Direct imports for Chakra components
+from reflex.components.chakra.layout import Box, Flex, VStack
+from reflex.components.chakra.typography import Heading, Text
+from reflex.components.chakra.navigation import Link
+from reflex.components.chakra.forms import Button
+from reflex.components.chakra.media import Image
+
 # -----------------------------------------------------------------------------
 # App State
 # -----------------------------------------------------------------------------
@@ -98,13 +105,13 @@ class State(rx.State):
 # Reusable Components
 # -----------------------------------------------------------------------------
 def product_card(product: dict):
-    return rx.chakra.link(
-        rx.chakra.vstack(
-            rx.chakra.image(src=product["image_url"], alt=product["title"],
+    return Link(
+        VStack(
+            Image(src=product["image_url"], alt=product["title"],
                      height="150px", width="auto", object_fit="contain"),
-            rx.chakra.text(product["title"], height="5em",
+            Text(product["title"], height="5em",
                     text_align="center", font_weight="500", size="3"),
-            rx.chakra.button("View on Amazon", width="100%"),
+            Button("View on Amazon", width="100%"),
             spacing="4", align="center"),
         href=product["affiliate_link"], is_external=True,
         text_decoration="none", color_scheme="gray",
@@ -114,11 +121,11 @@ def product_card(product: dict):
     )
 
 def hub_section(title: str, text: str, products: list[dict]):
-    return rx.chakra.vstack(
-        rx.chakra.heading(title, size="7"),
-        rx.chakra.text(text, max_width="600px",
+    return VStack(
+        Heading(title, size="7"),
+        Text(text, max_width="600px",
                 text_align="center", color_scheme="gray"),
-        rx.chakra.flex(
+        Flex(
             rx.foreach(products, product_card),
             spacing="5", padding_y="2em",
             wrap="wrap", justify="center"
@@ -128,17 +135,17 @@ def hub_section(title: str, text: str, products: list[dict]):
     )
 
 def footer():
-    return rx.chakra.vstack(
-        rx.chakra.text("As an Amazon Associate, I earn from qualifying purchases.",
+    return VStack(
+        Text("As an Amazon Associate, I earn from qualifying purchases.",
                 color_scheme="gray", font_style="italic", size="2"),
-        rx.chakra.text(f"© {datetime.now().year} Pilot My Home"),
+        Text(f"© {datetime.now().year} Pilot My Home"),
         align="center", spacing="2",
         padding="2em", width="100%",
         background_color="#FAFAFA"
     )
 
 def base_layout(child: rx.Component):
-    return rx.chakra.vstack(child, footer(), spacing="0", width="100%")
+    return VStack(child, footer(), spacing="0", width="100%")
 
 
 # -----------------------------------------------------------------------------
@@ -147,17 +154,17 @@ def base_layout(child: rx.Component):
 @rx.page(route="/", title="Pilot My Home | Abundant Living with Technology")
 def index() -> rx.Component:
     return base_layout(
-        rx.chakra.vstack(
+        VStack(
             # Hero Section
-            rx.chakra.box(
-                rx.chakra.vstack(
-                    rx.chakra.heading("Steer Your Home Towards Abundance",
+            Box(
+                VStack(
+                    Heading("Steer Your Home Towards Abundance",
                                size="9", color="white"),
-                    rx.chakra.text(
+                    Text(
                         "Guiding Christian families to live more peacefully and purposefully with today's technology.",
                         size="5", color="white"),
-                    rx.chakra.link(
-                        rx.chakra.button("Explore Our Guides", size="3", margin_top="1em", width="100%"),
+                    Link(
+                        Button("Explore Our Guides", size="3", margin_top="1em", width="100%"),
                         href="/guides",
                         text_decoration="none",
                     ),
@@ -171,9 +178,9 @@ def index() -> rx.Component:
             ),
 
             # Mission Section
-            rx.chakra.vstack(
-                rx.chakra.heading("Faith, Family, and the Thoughtful Home", size="7"),
-                rx.chakra.text(
+            VStack(
+                Heading("Faith, Family, and the Thoughtful Home", size="7"),
+                Text(
                     "Welcome to Pilot My Home. We believe technology shouldn't complicate life, but enrich it. We're here to help you navigate the world of smart home tech to create more time for what truly matters: your family and your faith. Let's build a home of peace and purpose, together.",
                     max_width="700px", text_align="center"
                 ),
@@ -210,16 +217,11 @@ def index() -> rx.Component:
 @rx.page(route="/guides", title="Guides | Pilot My Home")
 def guides() -> rx.Component:
     return base_layout(
-        rx.chakra.vstack(
-            rx.chakra.heading("Our Guides", size="8"),
-            rx.chakra.text("In-depth resources to help you build a more thoughtful home."),
-            rx.chakra.link("A Christian Family's Guide to Home Security & Peace of Mind",
+        VStack(
+            Heading("Our Guides", size="8"),
+            Text("In-depth resources to help you build a more thoughtful home."),
+            Link("A Christian Family's Guide to Home Security & Peace of Mind",
                     href="/guides/security"),
-            # Add links to future guides here
-            # rx.link("Good Stewardship of Time: 5 Ways to Automate Your Home",
-            #         href="/guides/stewardship"),
-            # rx.link("Tech for Connection: Our Picks for Family Movie Nights",
-            #         href="/guides/connection"),
             spacing="5", padding="4em", align="center"
         )
     )
@@ -227,17 +229,17 @@ def guides() -> rx.Component:
 @rx.page(route="/guides/security", title="Home Security Guide | Pilot My Home")
 def guide_security() -> rx.Component:
     return base_layout(
-        rx.chakra.vstack(
-            rx.chakra.heading("A Christian Family's Guide to Home Security",
+        VStack(
+            Heading("A Christian Family's Guide to Home Security",
                        size="8", text_align="center"),
-            rx.chakra.text(f"Published {datetime.now().strftime('%B %d, %Y')}", color_scheme="gray", text_align="center"),
-            rx.chakra.text(
+            Text(f"Published {datetime.now().strftime('%B %d, %Y')}", color_scheme="gray", text_align="center"),
+            Text(
                 "Feeling secure in our homes is not just about technology; it's about creating a sanctuary of peace for our family. In this guide, we discuss how modern tools can help us be good stewards of that peace. We'll look at video doorbells, cameras, and locks from a parent's perspective.",
                 padding_y="2em", max_width="800px",
             ),
-            rx.chakra.heading("Our Top Recommended Security Products",
+            Heading("Our Top Recommended Security Products",
                        size="6", padding_top="1em"),
-            rx.chakra.flex(
+            Flex(
                 rx.foreach(State.guide_products["security"], product_card),
                 spacing="5", padding_y="2em",
                 wrap="wrap", justify="center"
