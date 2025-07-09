@@ -21,12 +21,14 @@ platformdirs==4.3.8
 pydantic==2.11.7
 pydantic_core==2.33.2
 Pygments==2.19.2
+python-dotenv
 python-engineio==4.12.2
 python-multipart==0.0.20
 python-socketio==5.13.0
 PyYAML==6.0.2
 redis==6.2.0
 reflex==0.8.1
+reflex-chakra-components
 reflex-hosting-cli==0.1.51
 rich==14.0.0
 simple-websocket==1.1.0
