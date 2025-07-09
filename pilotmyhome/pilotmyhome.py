@@ -151,8 +151,16 @@ def hub_section(title: str, text_content: str, products: list[dict]):
 
 def footer():
     return rx.vstack(
-        rx.text("As an Amazon Associate, I earn from qualifying purchases.",
-                font_style="italic", size="2", color="var(--gray-10)"),
+        rx.hstack(
+            rx.link("Home", href="/"),
+            rx.link("Guides", href="/guides"),
+            rx.link("About Us", href="/about"),
+            spacing="5",
+        ),
+        rx.text(
+            "As an Amazon Associate, we earn from qualifying purchases.",
+            font_style="italic", size="2", color="var(--gray-10)", margin_top="1em"
+        ),
         rx.text(f"© {datetime.now().year} Pilot My Home"),
         align="center", spacing="2",
         padding="2em", width="100%",
@@ -250,7 +258,7 @@ def guide_security() -> rx.Component:
             
             rx.vstack(
                 rx.text(
-                    "Our homes are our sanctuaries—a gift we are called to steward wisely. In today's world, that stewardship includes being thoughtful about security. This isn't about living in fear, but about creating an environment of peace and safety where your family can flourish. Modern technology, when chosen and used intentionally, can be a powerful tool in piloting a secure and peaceful home."
+                    "Our homes are our sanctuaries—a gift we are called to steward wisely. In today's world, that stewardship includes being thoughtful about security. When you Ask God to save you,  don't ignore His gift of Wisdom. This isn't about living in fear, but about creating an environment of peace and safety where your family can flourish. Modern technology, when chosen and used intentionally, can be a powerful tool in piloting a secure and peaceful home."
                 ),
                 rx.heading("The Digital Welcome Mat: Video Doorbells", size="6", padding_top="1em"),
                 rx.text(
@@ -308,6 +316,31 @@ def guide_stewardship() -> rx.Component:
                 rx.foreach(State.guide_products["stewardship"], product_card),
                 spacing="5", padding_y="2em",
                 wrap="wrap", justify="center"
+            ),
+            max_width="90%", padding="2em", spacing="4", align="center"
+        )
+    )
+
+@rx.page(route="/about", title="About | Pilot My Home")
+def about() -> rx.Component:
+    return base_layout(
+        rx.vstack(
+            rx.heading("About Pilot My Home", size="8", text_align="center"),
+            rx.vstack(
+                rx.heading("Our Mission", size="6", padding_top="1em"),
+                rx.text(
+                    "Welcome! We are a husband and wife team with a passion for our faith, our family, and the incredible potential of technology to enrich our lives. We started Pilot My Home to share our journey and help other Christian families navigate the world of smart home devices.",
+                ),
+                rx.text(
+                    "Our goal is to provide honest guidance on how these tools can be used not as a distraction, but as a way to create a more peaceful, secure, and intentional home environment. We believe that by thoughtfully automating daily tasks and simplifying our routines, we can be better stewards of our time, freeing us up for what truly matters: fellowship, prayer, and family."
+                ),
+                rx.heading("What You'll Find Here", size="6", padding_top="1em"),
+                rx.text(
+                    "Here you'll find practical guides, in-depth reviews, and curated recommendations for products we believe in. We're so glad you're here and pray this resource is a blessing to you and your family."
+                ),
+                spacing="4",
+                max_width="800px",
+                text_align="left",
             ),
             max_width="90%", padding="2em", spacing="4", align="center"
         )
