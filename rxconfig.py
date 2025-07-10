@@ -5,5 +5,5 @@ class PilotmyhomeConfig(rx.Config):
 
 config = PilotmyhomeConfig(
     app_name="pilotmyhome",
-    api_url="",
+    api_url="http://localhost:8000",
 )
