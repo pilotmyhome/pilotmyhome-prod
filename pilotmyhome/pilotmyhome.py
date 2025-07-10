@@ -2,8 +2,8 @@ import reflex as rx
 from datetime import datetime
 from typing import List, Dict
 
-# The iframe component is part of rx.html
-from reflex.components.radix.themes.layout import Flex as RadixFlex
+# Corrected the import from 'Flex' to 'flex'
+from reflex.components.radix.themes.layout import flex as RadixFlex
 
 # -----------------------------------------------------------------------------
 # App State
