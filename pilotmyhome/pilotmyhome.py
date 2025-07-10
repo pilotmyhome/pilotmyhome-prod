@@ -192,6 +192,20 @@ class State(rx.State):
         ]
     }
 
+    # --- NEW COMPUTED VARS START HERE ---
+    @rx.var
+    def housekeeper_products(self) -> list[dict]:
+        return [p for p in self.guide_products["robotics"] if p["category"] == "housekeeper"]
+
+    @rx.var
+    def companion_products(self) -> list[dict]:
+        return [p for p in self.guide_products["robotics"] if p["category"] == "companion"]
+
+    @rx.var
+    def landscaper_products(self) -> list[dict]:
+        return [p for p in self.guide_products["robotics"] if p["category"] == "landscaper"]
+    # --- NEW COMPUTED VARS END HERE ---
+
 # -----------------------------------------------------------------------------
 # Reusable Components
 # -----------------------------------------------------------------------------
@@ -489,9 +503,8 @@ def guide_robotics() -> rx.Component:
                 ),
                 rx.flex(
                     rx.foreach(
-                        State.guide_products["robotics"], 
-                        product_card, 
-                        where=lambda product: product["category"] == "housekeeper"
+                        State.housekeeper_products,
+                        product_card
                     ),
                     spacing="5", padding_y="2em",
                     wrap="wrap", justify="center",
@@ -506,9 +519,8 @@ def guide_robotics() -> rx.Component:
                 ),
                 rx.flex(
                     rx.foreach(
-                        State.guide_products["robotics"], 
-                        product_card,
-                        where=lambda product: product["category"] == "companion"
+                        State.companion_products,
+                        product_card
                     ),
                     spacing="5", padding_y="2em",
                     wrap="wrap", justify="center",
@@ -523,9 +535,8 @@ def guide_robotics() -> rx.Component:
                 ),
                 rx.flex(
                     rx.foreach(
-                        State.guide_products["robotics"], 
-                        product_card,
-                        where=lambda product: product["category"] == "landscaper"
+                        State.landscaper_products, 
+                        product_card
                     ),
                     spacing="5", padding_y="2em",
                     wrap="wrap", justify="center",
@@ -540,6 +551,7 @@ def guide_robotics() -> rx.Component:
             padding="2em", spacing="4", align="center"
         )
     )
+
 
 # -----------------------------------------------------------------------------
 # App Initialization
