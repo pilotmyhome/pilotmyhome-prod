@@ -150,14 +150,14 @@ class State(rx.State):
             {
                 "title": "eufy Robot Vacuum Omni C20",
                 "image_url": "https://m.media-amazon.com/images/I/7162dbcZW3L._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/roborock-Q7-M5-Anti-Tangle-APP-Controlled/dp/B0DSJ93KPD?tag=pilotmyhome-20", # Placeholder link
+                "affiliate_link": "https://www.amazon.com/eufy-Emptying-hands-free-3-35-Inch-Ultra-Slim/dp/B0DCFNZF32?tag=pilotmyhome-20",
                 "motivation": "'Whatever you do, work at it with all your heart, as working for the Lord' (Colossians 3:23). Using intelligent tools to maintain our homes with excellence is a modern way to honor this principle, serving our family with diligence.",
                 "category": "housekeeper"
             },
             {
                 "title": "Amazon Astro",
                 "image_url": "https://m.media-amazon.com/images/I/61fPLtmoSNL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/eufy-Emptying-hands-free-3-35-Inch-Ultra-Slim/dp/B0DCFNZF32?tag=pilotmyhome-20",
+                "affiliate_link": "https://www.amazon.com/introducing-amazon-astro-household-robot-with-intelligent-motion/dp/B078NS8H82?tag=pilotmyhome-20",
                 "motivation": "A 'helper' is a deeply biblical concept. This automaton can act as a central hub, a tireless helper that assists in managing daily tasks, connecting with loved ones, and guarding the home—a modern tool for a well-managed household.",
                 "category": "companion"
             },
@@ -169,9 +169,9 @@ class State(rx.State):
                 "category": "companion"
             },
             {
-                "title": "Youtooz Helluva Loona 5",
-                "image_url": "https://m.media-amazon.com/images/I/61DtyARb76L._AC_SL1200_.jpg",
-                "affiliate_link": "utooz-Helluva-Loona-Collectible-Boss/dp/B0D7CJD2YC?tag=pilotmyhome-20",
+                "title": "Loona: The Smart Robot Pet",
+                "image_url": "https://m.media-amazon.com/images/I/718yC25VhDL._AC_SL1500_.jpg",
+                "affiliate_link": "https://www.amazon.com/loona-Petbot-Graphic-Programming-Games-Remote/dp/B0CHS6C2RR?tag=pilotmyhome-20",
                 "motivation": "God's creation is filled with joy and personality. A robotic pet can be a source of innocent joy and laughter, reminding us of the importance of play and lighthearted connection in a loving home.",
                 "category": "companion"
             },
@@ -185,14 +185,13 @@ class State(rx.State):
             {
                 "title": "Segway Navimow H-Series",
                 "image_url": "https://m.media-amazon.com/images/I/61EDud-50eL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/i105N-Perimeter-AI-Assisted-Multi-Zone-Management/dp/B0CX8LL2PC?pilotmyhome-20",
+                "affiliate_link": "https://www.amazon.com/i105N-Perimeter-AI-Assisted-Multi-Zone-Management/dp/B0CX8LL2PC?tag=pilotmyhome-20",
                 "motivation": "'Let all things be done decently and in order' (1 Corinthians 14:40). Applying this principle to our homes creates an external environment that reflects inner peace. Precise, automated tools help achieve this order, freeing our time for higher callings.",
                 "category": "landscaper"
             },
         ]
     }
 
-    # --- NEW COMPUTED VARS START HERE ---
     @rx.var
     def housekeeper_products(self) -> list[dict]:
         return [p for p in self.guide_products["robotics"] if p["category"] == "housekeeper"]
@@ -204,7 +203,6 @@ class State(rx.State):
     @rx.var
     def landscaper_products(self) -> list[dict]:
         return [p for p in self.guide_products["robotics"] if p["category"] == "landscaper"]
-    # --- NEW COMPUTED VARS END HERE ---
 
 # -----------------------------------------------------------------------------
 # Reusable Components
@@ -551,7 +549,6 @@ def guide_robotics() -> rx.Component:
             padding="2em", spacing="4", align="center"
         )
     )
-
 
 # -----------------------------------------------------------------------------
 # App Initialization
