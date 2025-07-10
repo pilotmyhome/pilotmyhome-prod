@@ -169,9 +169,9 @@ class State(rx.State):
                 "category": "companion"
             },
             {
-                "title": "Loona: The Smart Robot Pet",
-                "image_url": "https://m.media-amazon.com/images/I/718yC25VhDL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/loona-Petbot-Graphic-Programming-Games-Remote/dp/B0CHS6C2RR?tag=pilotmyhome-20",
+                "title": "Youtooz Helluva Loona 5",
+                "image_url": "https://m.media-amazon.com/images/I/61DtyARb76L._AC_SL1200_.jpg",
+                "affiliate_link": "https://www.amazon.com/Youtooz-Helluva-Loona-Collectible-Boss/dp/B0D7CJD2YC?tag=pilotmyhome-20",
                 "motivation": "God's creation is filled with joy and personality. A robotic pet can be a source of innocent joy and laughter, reminding us of the importance of play and lighthearted connection in a loving home.",
                 "category": "companion"
             },
