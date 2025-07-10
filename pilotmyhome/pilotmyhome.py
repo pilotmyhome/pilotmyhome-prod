@@ -2,6 +2,9 @@ import reflex as rx
 from datetime import datetime
 from typing import List, Dict
 
+# The iframe component is part of rx.html
+from reflex.components.radix.themes.layout import Flex as RadixFlex
+
 # -----------------------------------------------------------------------------
 # App State
 # -----------------------------------------------------------------------------
@@ -140,7 +143,7 @@ def hub_section(title: str, text_content: str, products: list[dict]):
         rx.heading(title, size="7"),
         rx.text(text_content, max_width="600px",
                 text_align="center", color="var(--gray-11)"),
-        rx.flex(
+        RadixFlex(
             rx.foreach(products, product_card),
             spacing="5", padding_y="2em",
             wrap="wrap", justify="center"
@@ -166,7 +169,7 @@ def footer():
         padding="2em", width="100%",
         background_color="var(--gray-2)"
     )
-
+    
 def persistent_stream_panel():
     """A persistent, rotated panel for the embedded stream."""
     return rx.box(
@@ -182,7 +185,7 @@ def persistent_stream_panel():
                 is_external=True,
                 size="1",
             ),
-            rx.iframe(src="https://www.myflr.org/stream/", width="280px", height="30px"),
+            rx.html.iframe(src="https://www.myflr.org/stream/", width="280px", height="30px"),
             spacing="1",
             align="center",
             padding="0.5em",
@@ -312,7 +315,7 @@ def guide_security() -> rx.Component:
                 ),
                 rx.heading("Your Watchful Eyes: Outdoor Cameras", size="6", padding_top="1em"),
                 rx.text(
-                    "For a broader view of your property, outdoor security cameras provide another layer of reassurance. They allow you to check on children playing in the yard, monitor your property at night, and keep a record of any unusual activity. Modern wireless cameras are simple to install and offer features like motion alerts sent directly to your phone, so you are always aware of what's happening at home."
+                    "For a broader view of your property, outdoor security cameras provide another layer of reassurance. They allow you to check on children playing in the yard, monitor your property at night, and keep a record of any unusual activity. Modern wireless cameras are simple to install and offer features like motion alerts sent directly to your phone, so you are aware of what's happening at home."
                 ),
                 rx.heading("A Note on Digital Stewardship", size="6", padding_top="1em"),
                 rx.text(
@@ -324,7 +327,7 @@ def guide_security() -> rx.Component:
 
             rx.heading("Our Top Recommended Security Products",
                        size="6", padding_top="2em"),
-            rx.flex(
+            RadixFlex(
                 rx.foreach(State.guide_products["security"], product_card),
                 spacing="5", padding_y="2em",
                 wrap="wrap", justify="center"
@@ -358,7 +361,7 @@ def guide_stewardship() -> rx.Component:
 
             rx.heading("Recommended Stewardship Tools",
                        size="6", padding_top="2em"),
-            rx.flex(
+            RadixFlex(
                 rx.foreach(State.guide_products["stewardship"], product_card),
                 spacing="5", padding_y="2em",
                 wrap="wrap", justify="center"
