@@ -161,14 +161,60 @@ def footer():
             "As an Amazon Associate, we earn from qualifying purchases.",
             font_style="italic", size="2", color="var(--gray-10)", margin_top="1em"
         ),
-        rx.text(f"© {datetime.now().year} Pilot My Home"),
+        rx.text(f"© {datetime.now().year} Pilot My Home", margin_top="1em"),
         align="center", spacing="2",
         padding="2em", width="100%",
         background_color="var(--gray-2)"
     )
 
+def persistent_stream_panel():
+    """A persistent, rotated panel for the embedded stream."""
+    return rx.box(
+        rx.vstack(
+            rx.text(
+                "We support the Kingdom by supporting myflr.org",
+                size="1",
+                font_weight="bold",
+            ),
+            rx.link(
+                "Give to myflr.org",
+                href="https://www.myflr.org/give/",
+                is_external=True,
+                size="1",
+            ),
+            rx.iframe(src="https://www.myflr.org/stream/", width="280px", height="30px"),
+            spacing="1",
+            align="center",
+            padding="0.5em",
+        ),
+        style={
+            "position": "fixed",
+            "bottom": "170px",
+            "right": "-110px", 
+            "width": "300px",   
+            "height": "90px",   
+            "transform": "rotate(-90deg)", 
+            "transform_origin": "bottom right",
+            "z_index": "9999",
+            "border": "1px solid #EAEAEA",
+            "border_radius": "8px",
+            "background_color": "rgba(255, 255, 255, 0.95)",
+            "box_shadow": "0px 4px 20px rgba(0,0,0,0.15)",
+        }
+    )
+
 def base_layout(child: rx.Component):
-    return rx.vstack(child, footer(), spacing="0", align="center")
+    """The base layout for all pages, now including the persistent panel."""
+    return rx.box(
+        rx.vstack(
+            child, 
+            footer(), 
+            spacing="0", 
+            align="center"
+        ),
+        persistent_stream_panel(),
+        position="relative" 
+    )
 
 
 # -----------------------------------------------------------------------------
@@ -329,7 +375,7 @@ def about() -> rx.Component:
             rx.vstack(
                 rx.heading("Our Mission", size="6", padding_top="1em"),
                 rx.text(
-                    "Welcome! We are a husband and wife team with a passion for our faith, our family, and the incredible potential of technology to enrich our lives. We started Pilot My Home to share our journey and help other Christian families navigate the world of smart home devices.",
+                    "Welcome to Pilot My Home! We are a husband and wife team dedicated to our faith, our family, and the incredible potential of technology to enrich our lives. We started Pilot My Home to share our journey and help other Christian families navigate the world of smart home devices.",
                 ),
                 rx.text(
                     "Our goal is to provide honest guidance on how these tools can be used not as a distraction, but as a way to create a more peaceful, secure, and intentional home environment. We believe that by thoughtfully automating daily tasks and simplifying our routines, we can be better stewards of our time, freeing us up for what truly matters: fellowship, prayer, and family."
