@@ -91,19 +91,22 @@ class State(rx.State):
                 "title": "Ring Battery Doorbell with Head‑to‑Toe Video – Satin Nickel",
                 "image_url": "https://m.media-amazon.com/images/I/519N1IBi3iL._SY450_.jpg",
                 "affiliate_link": "https://www.amazon.com/Ring-Battery-Doorbell-Head-to-Toe-Video-Satin-Nickel/dp/B0BZWRSRWV?tag=pilotmyhome-20",
-                "motivation": "The Bible calls us to be wise as serpents and innocent as doves. Guarding the threshold of your home is an act of wisdom, creating a sanctuary of peace where your family can flourish without fear."
+                "motivation": "The Bible calls us to be wise as serpents and innocent as doves. Guarding the threshold of your home is an act of wisdom, creating a sanctuary of peace where your family can flourish without fear.",
+                "category": "security"
             },
             {
                 "title": "Blink Outdoor 4 (4th Gen) – Wire-free smart security camera",
                 "image_url": "https://m.media-amazon.com/images/I/61s4s6sXyIL._AC_SL1500_.jpg",
                 "affiliate_link": "https://www.amazon.com/Blink-Outdoor-4th-Gen-Wire-free/dp/B0B12C2N2X?tag=pilotmyhome-20",
-                "motivation": "Good stewardship extends to the property God has blessed us with. A watchful eye over your home provides not just security, but also the peace of mind that allows you to rest, knowing you've taken practical steps to protect your family."
+                "motivation": "Good stewardship extends to the property God has blessed us with. A watchful eye over your home provides not just security, but also the peace of mind that allows you to rest, knowing you've taken practical steps to protect your family.",
+                "category": "security"
             },
             {
                 "title": "eufy Security S220 SoloCam, Wireless Outdoor Security Camera",
                 "image_url": "https://m.media-amazon.com/images/I/61Vd6v-0gmL._AC_SL1500_.jpg",
                 "affiliate_link": "https://www.amazon.com/eufy-Security-S220-SoloCam-Spotlight/dp/B09T92N52N?tag=pilotmyhome-20",
-                "motivation": "Let your peace not be disturbed by worry. Tools that provide awareness of your surroundings free your mind from 'what-ifs', allowing you to be more present and focused on your family and your walk with God."
+                "motivation": "Let your peace not be disturbed by worry. Tools that provide awareness of your surroundings free your mind from 'what-ifs', allowing you to be more present and focused on your family and your walk with God.",
+                "category": "security"
             },
         ],
         "stewardship": [
@@ -111,19 +114,80 @@ class State(rx.State):
                 "title": "roborock Q7 M5 Robot Vacuum and Mop Combo, 10 000 Pa HyperForce",
                 "image_url": "https://m.media-amazon.com/images/I/7162dbcZW3L._AC_SL1500_.jpg",
                 "affiliate_link": "https://www.amazon.com/roborock-Q7-M5-Anti-Tangle-APP-Controlled/dp/B0DSJ93KPD?tag=pilotmyhome-20",
-                "motivation": "Our time is a precious gift from God. By being good stewards of our minutes and automating the mundane, we reclaim time not for idleness, but for purpose: for family, for prayer, and for serving others with renewed energy."
+                "motivation": "Our time is a precious gift from God. By being good stewards of our minutes and automating the mundane, we reclaim time not for idleness, but for purpose: for family, for prayer, and for serving others with renewed energy.",
+                "category": "stewardship"
             },
             {
                 "title": "Instant Pot Duo Crisp 11‑in‑1 Air Fryer & Pressure Cooker, 6 Qt",
                 "image_url": "https://m.media-amazon.com/images/I/81vc3qXKPpL._AC_SL1500_.jpg",
                 "affiliate_link": "https://www.amazon.com/Instant-Pot-Multi-Use-Pressure-Cooker/dp/B08WCLJ7JG?tag=pilotmyhome-20",
-                "motivation": "Breaking bread together is a sacred act. By simplifying the preparation of meals, we reduce stress and create more opportunity for meaningful conversation and connection around the dinner table, the heart of the home."
+                "motivation": "Breaking bread together is a sacred act. By simplifying the preparation of meals, we reduce stress and create more opportunity for meaningful conversation and connection around the dinner table, the heart of the home.",
+                "category": "stewardship"
             },
             {
                 "title": "Amazon Echo Dot (5th Gen, 2022 Release) Glacier White",
                 "image_url": "https://m.media-amazon.com/images/I/7116ea3BmTL._AC_SL1500_.jpg",
                 "affiliate_link": "https://www.amazon.com/Amazon-release-vibrant-helpful-routines/dp/B09B94RL1R?tag=pilotmyhome-20",
-                "motivation": "The book of Proverbs speaks of the power of a timely word. Use this helper to fill your home with worship music, listen to the Word of God, or set reminders for prayer, intentionally inviting His presence into your daily rhythm."
+                "motivation": "The book of Proverbs speaks of the power of a timely word. Use this helper to fill your home with worship music, listen to the Word of God, or set reminders for prayer, intentionally inviting His presence into your daily rhythm.",
+                "category": "stewardship"
+            },
+        ],
+        "robotics": [
+            {
+                "title": "Roborock S8 MaxV Ultra",
+                "image_url": "https://m.media-amazon.com/images/I/71C4b42-r4L._AC_SL1500_.jpg",
+                "affiliate_link": "https://www.amazon.com/roborock-Self-Washing-Extendable-Obstacle-Avoidance/dp/B0CSX9V889?tag=pilotmyhome-20",
+                "motivation": "The Kingdom of God is one of peace and order. By delegating the constant task of maintaining a clean foundation for our home, we act as wise stewards of our God-given energy, focusing less on the dust of the world and more on cultivating a sanctuary of peace.",
+                "category": "housekeeper"
+            },
+            {
+                "title": "Ecovacs Deebot X2 Omni",
+                "image_url": "https://m.media-amazon.com/images/I/71G8ys0c4jL._AC_SL1500_.jpg",
+                "affiliate_link": "https://www.amazon.com/ECOVACS-DEEBOT-X2-OMNI-Self-Emptying/dp/B0CB1B132L?tag=pilotmyhome-20",
+                "motivation": "A well-ordered home that is ready to welcome others is an act of hospitality and love. Automating the core of our home's cleanliness prepares our hearts and our space to be present for fellowship, unburdened by the stress of pending chores.",
+                "category": "housekeeper"
+            },
+            {
+                "title": "eufy X10 Pro Omni",
+                "image_url": "https://m.media-amazon.com/images/I/7162dbcZW3L._AC_SL1500_.jpg",
+                "affiliate_link": "https://www.amazon.com/roborock-Q7-M5-Anti-Tangle-APP-Controlled/dp/B0DSJ93KPD?tag=pilotmyhome-20", # Placeholder link
+                "motivation": "'Whatever you do, work at it with all your heart, as working for the Lord' (Colossians 3:23). Using intelligent tools to maintain our homes with excellence is a modern way to honor this principle, serving our family with diligence.",
+                "category": "housekeeper"
+            },
+            {
+                "title": "Amazon Astro",
+                "image_url": "https://m.media-amazon.com/images/I/61m2s4s7RcL._AC_SL1500_.jpg",
+                "affiliate_link": "https://www.amazon.com/Introducing-Amazon-Astro-household-monitoring/dp/B078NS8H82?tag=pilotmyhome-20",
+                "motivation": "A 'helper' is a deeply biblical concept. This automaton acts as a central hub, a tireless helper that assists in managing daily tasks, connecting with loved ones, and guarding the home—a modern tool for a well-managed household.",
+                "category": "companion"
+            },
+            {
+                "title": "Enabot EBO X",
+                "image_url": "https://m.media-amazon.com/images/I/61KNY3xYqBL._AC_SL1500_.jpg",
+                "affiliate_link": "https://www.amazon.com/enabot-Companion-Detection-Obstacle-Avoidance/dp/B0CL2329Y2?tag=pilotmyhome-20",
+                "motivation": "The fifth commandment instructs us to honor our parents. Technology can be a bridge for compassionate care, allowing us to lovingly watch over elderly family members and fulfill our duty of care with peace of mind.",
+                "category": "companion"
+            },
+            {
+                "title": "Loona",
+                "image_url": "https://m.media-amazon.com/images/I/718yC25VhDL._AC_SL1500_.jpg",
+                "affiliate_link": "https://www.amazon.com/loona-Petbot-Graphic-Programming-Games-Remote/dp/B0CHS6C2RR?tag=pilotmyhome-20",
+                "motivation": "God's creation is filled with joy and personality. A robotic pet can be a source of innocent joy and laughter, reminding us of the importance of play and lighthearted connection in a loving home.",
+                "category": "companion"
+            },
+            {
+                "title": "Husqvarna Automower® 450X NERA",
+                "image_url": "https://m.media-amazon.com/images/I/81B+FNcg66L._AC_SL1500_.jpg",
+                "affiliate_link": "https://www.amazon.com/Husqvarna-Automower-450X-Robotic-Mower/dp/B08P2Y8128?tag=pilotmyhome-20",
+                "motivation": "From Eden, humanity was tasked with tending creation. Automating the care of our property is an act of modern stewardship, creating a well-ordered space for our families to enjoy and for offering hospitality to others.",
+                "category": "landscaper"
+            },
+            {
+                "title": "Segway Navimow H-Series",
+                "image_url": "https://m.media-amazon.com/images/I/71N7J-Lq4hL._AC_SL1500_.jpg",
+                "affiliate_link": "https://www.amazon.com/Segway-Navimow-Installation-Multi-Zone-Management/dp/B0C39W82P6?tag=pilotmyhome-20",
+                "motivation": "'Let all things be done decently and in order' (1 Corinthians 14:40). Applying this principle to our homes creates an external environment that reflects inner peace. Precise, automated tools help achieve this order, freeing our time for higher callings.",
+                "category": "landscaper"
             },
         ]
     }
@@ -197,7 +261,7 @@ def hub_section(title: str, text_content: str, products: list[dict]):
             rx.foreach(products, product_card),
             spacing="5", padding_y="2em",
             wrap="wrap", justify="center",
-            align_items="stretch", # Ensures cards in a row are the same height
+            align_items="stretch", 
         ),
         spacing="4", align="center",
         width="100%", padding_y="3em"
@@ -304,6 +368,7 @@ def guides() -> rx.Component:
             rx.link("A Christian Family's Guide to Home Security & Peace of Mind",
                     href="/guides/security"),
             rx.link("Good Stewardship of Time: A Guide", href="/guides/stewardship"),
+            rx.link("The Kingdom is Here: A Guide to Advanced Home Robotics", href="/guides/robotics"),
             spacing="5", padding="4em", align="center"
         )
     )
@@ -391,7 +456,7 @@ def about() -> rx.Component:
             rx.vstack(
                 rx.heading("Our Mission", size="6", padding_top="1em"),
                 rx.text(
-                    "Welcome to Pilot My Home! We are [Your Names], a husband and wife team dedicated to our faith, our family, and the incredible potential of technology to enrich our lives. We started Pilot My Home to share our journey and help other Christian families navigate the world of smart home devices.",
+                    "Welcome to Pilot My Home! We are a husband and wife team dedicated to our faith, our family, and the incredible potential of technology to enrich our lives. We started Pilot My Home to share our journey and help other Christian families navigate the world of smart home devices.",
                 ),
                 rx.text(
                     "Our goal is to provide honest guidance on how these tools can be used not as a distraction, but as a way to create a more peaceful, secure, and intentional home environment. We believe that by thoughtfully automating daily tasks and simplifying our routines, we can be better stewards of our time, freeing us up for what truly matters: fellowship, prayer, and family."
@@ -407,6 +472,67 @@ def about() -> rx.Component:
             max_width="90%", padding="2em", spacing="4", align="center"
         )
     )
+
+@rx.page(route="/guides/robotics", title="The Kingdom is Here: Advanced Robotics | Pilot My Home")
+def guide_robotics() -> rx.Component:
+    # Helper to filter products by category for this page
+    def get_products_by_category(category: str):
+        return [p for p in State.guide_products["robotics"] if p["category"] == category]
+
+    return base_layout(
+        rx.vstack(
+            rx.heading("The Kingdom is Here: A Guide to Advanced Home Robotics", size="8", text_align="center"),
+            rx.text(f"Published {datetime.now().strftime('%B %d, %Y')}", color="var(--gray-10)", text_align="center"),
+
+            rx.vstack(
+                # Housekeeper Section
+                rx.heading("The Autonomous Housekeeper", size="7", padding_top="1.5em"),
+                rx.text(
+                    "The latest robotic floor cleaners have evolved into truly hands-off cleaning systems, capable of not just vacuuming and mopping, but also of maintaining themselves.",
+                    max_width="800px",
+                ),
+                rx.flex(
+                    rx.foreach(get_products_by_category("housekeeper"), product_card),
+                    spacing="5", padding_y="2em",
+                    wrap="wrap", justify="center",
+                    align_items="stretch",
+                ),
+
+                # Companion Section
+                rx.heading("The Social Companion & Home Guardian", size="7", padding_top="1.5em"),
+                rx.text(
+                    "Moving beyond cleaning, a new category of companion robots aims to integrate more deeply into the fabric of daily life, offering a blend of security, communication, and companionship.",
+                    max_width="800px",
+                ),
+                rx.flex(
+                    rx.foreach(get_products_by_category("companion"), product_card),
+                    spacing="5", padding_y="2em",
+                    wrap="wrap", justify="center",
+                    align_items="stretch",
+                ),
+
+                # Landscaper Section
+                rx.heading("The Automated Landscaper", size="7", padding_top="1.5em"),
+                rx.text(
+                    "For those with a yard to maintain, robotic lawnmowers offer a set-it-and-forget-it solution to landscaping, now with more advanced navigation and control than ever before.",
+                    max_width="800px",
+                ),
+                rx.flex(
+                    rx.foreach(get_products_by_category("landscaper"), product_card),
+                    spacing="5", padding_y="2em",
+                    wrap="wrap", justify="center",
+                    align_items="stretch",
+                ),
+
+                spacing="4",
+                max_width="90%",
+                align="center",
+                text_align="center",
+            ),
+            padding="2em", spacing="4", align="center"
+        )
+    )
+
 
 # -----------------------------------------------------------------------------
 # App Initialization
