@@ -158,7 +158,7 @@ class State(rx.State):
                 "title": "Amazon Astro",
                 "image_url": "https://m.media-amazon.com/images/I/61m2s4s7RcL._AC_SL1500_.jpg",
                 "affiliate_link": "https://www.amazon.com/Introducing-Amazon-Astro-household-monitoring/dp/B078NS8H82?tag=pilotmyhome-20",
-                "motivation": "A 'helper' is a deeply biblical concept. This automaton acts as a central hub, a tireless helper that assists in managing daily tasks, connecting with loved ones, and guarding the home—a modern tool for a well-managed household.",
+                "motivation": "A 'helper' is a deeply biblical concept. This automaton can act as a central hub, a tireless helper that assists in managing daily tasks, connecting with loved ones, and guarding the home—a modern tool for a well-managed household.",
                 "category": "companion"
             },
             {
@@ -475,10 +475,6 @@ def about() -> rx.Component:
 
 @rx.page(route="/guides/robotics", title="The Kingdom is Here: Advanced Robotics | Pilot My Home")
 def guide_robotics() -> rx.Component:
-    # Helper to filter products by category for this page
-    def get_products_by_category(category: str):
-        return [p for p in State.guide_products["robotics"] if p["category"] == category]
-
     return base_layout(
         rx.vstack(
             rx.heading("The Kingdom is Here: A Guide to Advanced Home Robotics", size="8", text_align="center"),
@@ -492,7 +488,11 @@ def guide_robotics() -> rx.Component:
                     max_width="800px",
                 ),
                 rx.flex(
-                    rx.foreach(get_products_by_category("housekeeper"), product_card),
+                    rx.foreach(
+                        State.guide_products["robotics"], 
+                        product_card, 
+                        where=lambda product: product["category"] == "housekeeper"
+                    ),
                     spacing="5", padding_y="2em",
                     wrap="wrap", justify="center",
                     align_items="stretch",
@@ -505,7 +505,11 @@ def guide_robotics() -> rx.Component:
                     max_width="800px",
                 ),
                 rx.flex(
-                    rx.foreach(get_products_by_category("companion"), product_card),
+                    rx.foreach(
+                        State.guide_products["robotics"], 
+                        product_card,
+                        where=lambda product: product["category"] == "companion"
+                    ),
                     spacing="5", padding_y="2em",
                     wrap="wrap", justify="center",
                     align_items="stretch",
@@ -518,7 +522,11 @@ def guide_robotics() -> rx.Component:
                     max_width="800px",
                 ),
                 rx.flex(
-                    rx.foreach(get_products_by_category("landscaper"), product_card),
+                    rx.foreach(
+                        State.guide_products["robotics"], 
+                        product_card,
+                        where=lambda product: product["category"] == "landscaper"
+                    ),
                     spacing="5", padding_y="2em",
                     wrap="wrap", justify="center",
                     align_items="stretch",
@@ -532,7 +540,6 @@ def guide_robotics() -> rx.Component:
             padding="2em", spacing="4", align="center"
         )
     )
-
 
 # -----------------------------------------------------------------------------
 # App Initialization
