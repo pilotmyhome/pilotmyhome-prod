@@ -2,8 +2,6 @@ import reflex as rx
 from datetime import datetime
 from typing import List, Dict
 
-# REMOVED the incorrect import from here.
-
 # -----------------------------------------------------------------------------
 # App State
 # -----------------------------------------------------------------------------
@@ -184,7 +182,7 @@ def persistent_stream_panel():
                 is_external=True,
                 size="1",
             ),
-            rx.html.iframe(src="https://www.myflr.org/stream/", width="280px", height="30px"),
+            rx.iframe(src="https://www.myflr.org/stream/", width="280px", height="30px"),
             spacing="1",
             align="center",
             padding="0.5em",
