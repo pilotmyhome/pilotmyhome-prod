@@ -166,42 +166,39 @@ def footer():
         padding="2em", width="100%",
         background_color="var(--gray-2)"
     )
-    
+
 def persistent_stream_panel():
-    """A persistent, rotated panel for the embedded stream."""
-    return rx.box(
-        rx.vstack(
+    """A persistent, rotated panel that links to the stream."""
+    return rx.link(
+        rx.box(
             rx.text(
-                "We support the Kingdom by supporting myflr.org",
-                size="1",
+                "Listen Live to myFLR",
                 font_weight="bold",
+                text_align="center",
             ),
-            rx.link(
-                "Give to myflr.org",
-                href="https://www.myflr.org/give/",
-                is_external=True,
-                size="1",
-            ),
-            # Using rx.html() to render the iframe directly
-            rx.html("<iframe src='https://www.myflr.org/stream/' style='border:none; width:280px; height:30px;'></iframe>"),
-            spacing="1",
-            align="center",
-            padding="0.5em",
+            style={
+                "position": "fixed",
+                "bottom": "170px",
+                "right": "-110px",
+                "width": "300px",
+                "height": "50px",
+                "line_height": "50px", # Vertically center the text
+                "transform": "rotate(-90deg)",
+                "transform_origin": "bottom right",
+                "z_index": "9999",
+                "border": "1px solid #EAEAEA",
+                "border_radius": "8px",
+                "background_color": "rgba(255, 255, 255, 0.95)",
+                "box_shadow": "0px 4px 20px rgba(0,0,0,0.15)",
+                "_hover": {
+                    "background_color": "rgba(240, 240, 240, 0.95)",
+                }
+            }
         ),
-        style={
-            "position": "fixed",
-            "bottom": "170px",
-            "right": "-110px", 
-            "width": "300px",   
-            "height": "90px",   
-            "transform": "rotate(-90deg)", 
-            "transform_origin": "bottom right",
-            "z_index": "9999",
-            "border": "1px solid #EAEAEA",
-            "border_radius": "8px",
-            "background_color": "rgba(255, 255, 255, 0.95)",
-            "box_shadow": "0px 4px 20px rgba(0,0,0,0.15)",
-        }
+        href="https://www.myflr.org/stream/",
+        is_external=True,
+        text_decoration="none",
+        color="var(--gray-12)",
     )
 
 def base_layout(child: rx.Component):
