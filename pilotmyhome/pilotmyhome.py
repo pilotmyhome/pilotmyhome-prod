@@ -2,8 +2,7 @@ import reflex as rx
 from datetime import datetime
 from typing import List, Dict
 
-# Corrected the import from 'Flex' to 'flex'
-from reflex.components.radix.themes.layout import flex as RadixFlex
+# REMOVED the incorrect import from here.
 
 # -----------------------------------------------------------------------------
 # App State
@@ -143,7 +142,7 @@ def hub_section(title: str, text_content: str, products: list[dict]):
         rx.heading(title, size="7"),
         rx.text(text_content, max_width="600px",
                 text_align="center", color="var(--gray-11)"),
-        RadixFlex(
+        rx.flex(
             rx.foreach(products, product_card),
             spacing="5", padding_y="2em",
             wrap="wrap", justify="center"
@@ -327,7 +326,7 @@ def guide_security() -> rx.Component:
 
             rx.heading("Our Top Recommended Security Products",
                        size="6", padding_top="2em"),
-            RadixFlex(
+            rx.flex(
                 rx.foreach(State.guide_products["security"], product_card),
                 spacing="5", padding_y="2em",
                 wrap="wrap", justify="center"
@@ -361,7 +360,7 @@ def guide_stewardship() -> rx.Component:
 
             rx.heading("Recommended Stewardship Tools",
                        size="6", padding_top="2em"),
-            RadixFlex(
+            rx.flex(
                 rx.foreach(State.guide_products["stewardship"], product_card),
                 spacing="5", padding_y="2em",
                 wrap="wrap", justify="center"
