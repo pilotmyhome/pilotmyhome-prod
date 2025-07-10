@@ -5,4 +5,5 @@ class PilotmyhomeConfig(rx.Config):
 
 config = PilotmyhomeConfig(
     app_name="pilotmyhome",
+    api_url="",
 )
