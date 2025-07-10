@@ -135,20 +135,20 @@ class State(rx.State):
         "robotics": [
             {
                 "title": "Roborock S8 MaxV Ultra",
-                "image_url": "https://m.media-amazon.com/images/I/71C4b42-r4L._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/roborock-Self-Washing-Extendable-Obstacle-Avoidance/dp/B0CSX9V889?tag=pilotmyhome-20",
+                "image_url": "https://m.media-amazon.com/images/I/712iLYEEb3L._AC_SL1500_.jpg",
+                "affiliate_link": "https://www.amazon.com/roborock-S8-MaxV-Ultra-Self-Drying/dp/B0CQLPNB2X?tag=pilotmyhome-20",
                 "motivation": "The Kingdom of God is one of peace and order. By delegating the constant task of maintaining a clean foundation for our home, we act as wise stewards of our God-given energy, focusing less on the dust of the world and more on cultivating a sanctuary of peace.",
                 "category": "housekeeper"
             },
             {
-                "title": "Ecovacs Deebot X2 Omni",
-                "image_url": "https://m.media-amazon.com/images/I/71G8ys0c4jL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/ECOVACS-DEEBOT-X2-OMNI-Self-Emptying/dp/B0CB1B132L?tag=pilotmyhome-20",
+                "title": "ECOVACS DEEBOT T50 PRO Omni Robot Vacuum and Mop, 3.19",
+                "image_url": "https://m.media-amazon.com/images/I/610I+9D8U6L._AC_SL1500_.jpg",
+                "affiliate_link": "https://www.amazon.com/ECOVACS-T50-PRO-Ultra-Slim-Self-Emptying/dp/B0DSB92P1N?tag=pilotmyhome-20",
                 "motivation": "A well-ordered home that is ready to welcome others is an act of hospitality and love. Automating the core of our home's cleanliness prepares our hearts and our space to be present for fellowship, unburdened by the stress of pending chores.",
                 "category": "housekeeper"
             },
             {
-                "title": "eufy X10 Pro Omni",
+                "title": "eufy Robot Vacuum Omni C20",
                 "image_url": "https://m.media-amazon.com/images/I/7162dbcZW3L._AC_SL1500_.jpg",
                 "affiliate_link": "https://www.amazon.com/roborock-Q7-M5-Anti-Tangle-APP-Controlled/dp/B0DSJ93KPD?tag=pilotmyhome-20", # Placeholder link
                 "motivation": "'Whatever you do, work at it with all your heart, as working for the Lord' (Colossians 3:23). Using intelligent tools to maintain our homes with excellence is a modern way to honor this principle, serving our family with diligence.",
@@ -156,36 +156,36 @@ class State(rx.State):
             },
             {
                 "title": "Amazon Astro",
-                "image_url": "https://m.media-amazon.com/images/I/61m2s4s7RcL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Introducing-Amazon-Astro-household-monitoring/dp/B078NS8H82?tag=pilotmyhome-20",
+                "image_url": "https://m.media-amazon.com/images/I/61fPLtmoSNL._AC_SL1500_.jpg",
+                "affiliate_link": "https://www.amazon.com/eufy-Emptying-hands-free-3-35-Inch-Ultra-Slim/dp/B0DCFNZF32?tag=pilotmyhome-20",
                 "motivation": "A 'helper' is a deeply biblical concept. This automaton can act as a central hub, a tireless helper that assists in managing daily tasks, connecting with loved ones, and guarding the home—a modern tool for a well-managed household.",
                 "category": "companion"
             },
             {
-                "title": "Enabot EBO X",
-                "image_url": "https://m.media-amazon.com/images/I/61KNY3xYqBL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/enabot-Companion-Detection-Obstacle-Avoidance/dp/B0CL2329Y2?tag=pilotmyhome-20",
+                "title": "Enabot Home Security Camera",
+                "image_url": "https://m.media-amazon.com/images/I/619BkgEoP1L._AC_SL1500_.jpg",
+                "affiliate_link": "https://www.amazon.com/Enabot-Security-Wireless-Self-Charging-Detection/dp/B09R6V3CJM?tag=pilotmyhome-20",
                 "motivation": "The fifth commandment instructs us to honor our parents. Technology can be a bridge for compassionate care, allowing us to lovingly watch over elderly family members and fulfill our duty of care with peace of mind.",
                 "category": "companion"
             },
             {
-                "title": "Loona",
-                "image_url": "https://m.media-amazon.com/images/I/718yC25VhDL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/loona-Petbot-Graphic-Programming-Games-Remote/dp/B0CHS6C2RR?tag=pilotmyhome-20",
+                "title": "Youtooz Helluva Loona 5",
+                "image_url": "https://m.media-amazon.com/images/I/61DtyARb76L._AC_SL1200_.jpg",
+                "affiliate_link": "utooz-Helluva-Loona-Collectible-Boss/dp/B0D7CJD2YC?tag=pilotmyhome-20",
                 "motivation": "God's creation is filled with joy and personality. A robotic pet can be a source of innocent joy and laughter, reminding us of the importance of play and lighthearted connection in a loving home.",
                 "category": "companion"
             },
             {
-                "title": "Husqvarna Automower® 450X NERA",
-                "image_url": "https://m.media-amazon.com/images/I/81B+FNcg66L._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Husqvarna-Automower-450X-Robotic-Mower/dp/B08P2Y8128?tag=pilotmyhome-20",
+                "title": "Husqvarna Automower 415X Robotic Lawn Mower",
+                "image_url": "https://m.media-amazon.com/images/I/61YL4bgni8L._AC_SL1500_.jpg",
+                "affiliate_link": "https://www.amazon.com/Husqvarna-Navigation-Installation-Ultra-Quiet-Technology/dp/B09WNDLXJL?tag=pilotmyhome-20",
                 "motivation": "From Eden, humanity was tasked with tending creation. Automating the care of our property is an act of modern stewardship, creating a well-ordered space for our families to enjoy and for offering hospitality to others.",
                 "category": "landscaper"
             },
             {
                 "title": "Segway Navimow H-Series",
-                "image_url": "https://m.media-amazon.com/images/I/71N7J-Lq4hL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Segway-Navimow-Installation-Multi-Zone-Management/dp/B0C39W82P6?tag=pilotmyhome-20",
+                "image_url": "https://m.media-amazon.com/images/I/61EDud-50eL._AC_SL1500_.jpg",
+                "affiliate_link": "https://www.amazon.com/i105N-Perimeter-AI-Assisted-Multi-Zone-Management/dp/B0CX8LL2PC?pilotmyhome-20",
                 "motivation": "'Let all things be done decently and in order' (1 Corinthians 14:40). Applying this principle to our homes creates an external environment that reflects inner peace. Precise, automated tools help achieve this order, freeing our time for higher callings.",
                 "category": "landscaper"
             },
