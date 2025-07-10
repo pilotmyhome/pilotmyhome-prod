@@ -182,7 +182,8 @@ def persistent_stream_panel():
                 is_external=True,
                 size="1",
             ),
-            rx.iframe(src="https://www.myflr.org/stream/", width="280px", height="30px"),
+            # Using rx.html() to render the iframe directly
+            rx.html("<iframe src='https://www.myflr.org/stream/' style='border:none; width:280px; height:30px;'></iframe>"),
             spacing="1",
             align="center",
             padding="0.5em",
