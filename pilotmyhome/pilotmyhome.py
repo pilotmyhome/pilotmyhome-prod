@@ -167,52 +167,8 @@ def footer():
         background_color="var(--gray-2)"
     )
 
-def persistent_stream_panel():
-    """A persistent, rotated panel that links to the stream."""
-    return rx.link(
-        rx.box(
-            rx.text(
-                "Listen Live to myFLR",
-                font_weight="bold",
-                text_align="center",
-            ),
-            style={
-                "position": "fixed",
-                "bottom": "170px",
-                "right": "-110px",
-                "width": "300px",
-                "height": "50px",
-                "line_height": "50px", # Vertically center the text
-                "transform": "rotate(-90deg)",
-                "transform_origin": "bottom right",
-                "z_index": "9999",
-                "border": "1px solid #EAEAEA",
-                "border_radius": "8px",
-                "background_color": "rgba(255, 255, 255, 0.95)",
-                "box_shadow": "0px 4px 20px rgba(0,0,0,0.15)",
-                "_hover": {
-                    "background_color": "rgba(240, 240, 240, 0.95)",
-                }
-            }
-        ),
-        href="https://www.myflr.org/stream/",
-        is_external=True,
-        text_decoration="none",
-        color="var(--gray-12)",
-    )
-
 def base_layout(child: rx.Component):
-    """The base layout for all pages, now including the persistent panel."""
-    return rx.box(
-        rx.vstack(
-            child, 
-            footer(), 
-            spacing="0", 
-            align="center"
-        ),
-        persistent_stream_panel(),
-        position="relative" 
-    )
+    return rx.vstack(child, footer(), spacing="0", align="center")
 
 
 # -----------------------------------------------------------------------------
@@ -373,7 +329,7 @@ def about() -> rx.Component:
             rx.vstack(
                 rx.heading("Our Mission", size="6", padding_top="1em"),
                 rx.text(
-                    "Welcome to Pilot My Home! We are a husband and wife team dedicated to our faith, our family, and the incredible potential of technology to enrich our lives. We started Pilot My Home to share our journey and help other Christian families navigate the world of smart home devices.",
+                    "Welcome to Pilot My Home! We are [Your Names], a husband and wife team dedicated to our faith, our family, and the incredible potential of technology to enrich our lives. We started Pilot My Home to share our journey and help other Christian families navigate the world of smart home devices.",
                 ),
                 rx.text(
                     "Our goal is to provide honest guidance on how these tools can be used not as a distraction, but as a way to create a more peaceful, secure, and intentional home environment. We believe that by thoughtfully automating daily tasks and simplifying our routines, we can be better stewards of our time, freeing us up for what truly matters: fellowship, prayer, and family."
