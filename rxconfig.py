@@ -5,6 +5,6 @@ class PilotmyhomeConfig(rx.Config):
 
 config = PilotmyhomeConfig(
     app_name="pilotmyhome",
-    db_url="sqlite:///reflex.db",
-    env=rx.Env.PROD,
+    # This line tells the frontend not to attempt a WebSocket connection.
+    api_url="javascript:void(0)",
 )
