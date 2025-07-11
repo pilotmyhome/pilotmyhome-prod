@@ -321,13 +321,6 @@ def index() -> rx.Component:
                 ),
                 padding_y="3em", align="center", spacing="4",
             ),
-
-            # Product Hubs
-            hub_section(
-                "Spirit‑Led Ambiance",
-                "Invite the purity of God’s presence into your home with these scriptures, scents, and sacred décor items.",
-                State.product_hubs["spirit_ambiance"],
-            ),
             spacing="0", width="100%", align="center",
         )
     )
@@ -342,6 +335,7 @@ def guides() -> rx.Component:
             rx.link("A Guide to a Peaceful Home", href="/guides/peaceful-home"),
             rx.link("A Guide to a Connected Family", href="/guides/connected-family"),
             rx.link("A Guide to an Abundant Kitchen", href="/guides/abundant-kitchen"),
+            rx.link("A Guide to a Spirit-Led Ambiance", href="/guides/spirit-led-ambiance"),
             rx.link("A Christian Family's Guide to Home Security & Peace of Mind", href="/guides/security"),
             rx.link("Good Stewardship of Time: A Guide", href="/guides/stewardship"),
             rx.link("The Kingdom is Here: A Guide to Advanced Home Robotics", href="/guides/robotics"),
@@ -378,6 +372,16 @@ def guide_abundant_kitchen() -> rx.Component:
             "A Guide to an Abundant Kitchen",
             "The kitchen is the heart of the home. Steward your resources well and simplify mealtime with technology that serves your family.",
             State.product_hubs["abundant_kitchen"],
+        )
+    )
+
+@rx.page(route="/guides/spirit-led-ambiance", title="Guide to a Spirit-Led Ambiance | Pilot My Home")
+def guide_spirit_led_ambiance() -> rx.Component:
+    return base_layout(
+        hub_section(
+            "A Guide to a Spirit-Led Ambiance",
+            "Invite the purity of God’s presence into your home with these scriptures, scents, and sacred décor items.",
+            State.product_hubs["spirit_ambiance"],
         )
     )
     
@@ -552,7 +556,7 @@ def guide_robotics() -> rx.Component:
 # -----------------------------------------------------------------------------
 # App Initialization
 # -----------------------------------------------------------------------------
-app = rx.App( 
+app = rx.App(
     theme=rx.theme(
         appearance="light",
         accent_color="sky",
