@@ -208,38 +208,61 @@ class State(rx.State):
 # Reusable Components
 # -----------------------------------------------------------------------------
 def product_card(product: dict):
-    return rx.vstack(
-        rx.link(
-            rx.image(src=product["image_url"], alt=product["title"], height="150px", width="auto", object_fit="contain"),
-            rx.text(product["title"], height="5em", text_align="center", font_weight="500", size="3"),
-            href=product["affiliate_link"],
-            is_external=True,
-            width="100%",
-        ),
+    return rx.dialog.root(
         rx.vstack(
-            rx.text("Point of Usage Wisdom", font_weight="bold", size="2"),
-            rx.text(product["motivation"], size="2", trim="both"),
-            spacing="1",
-            padding="0.5em",
-            margin_top="0.5em",
-            border_top="1px solid #EAEAEA",
-            width="100%",
-            align_items="flex-start",
+            rx.link(
+                rx.vstack(
+                    rx.image(src=product["image_url"], alt=product["title"],
+                             height="150px", width="auto", object_fit="contain"),
+                    rx.text(product["title"], height="5em",
+                            text_align="center", font_weight="500", size="3"),
+                ),
+                href=product["affiliate_link"],
+                is_external=True,
+            ),
+            rx.spacer(min_y="0.5em"),
+            rx.dialog.trigger(
+                rx.badge(
+                    "Motivation",
+                    cursor="pointer",
+                    color_scheme="grass",
+                    variant="soft",
+                )
+            ),
+            rx.link(
+                rx.button("View on Amazon", width="100%", margin_top="0.5em"),
+                href=product["affiliate_link"],
+                is_external=True,
+                width="100%",
+            ),
+            spacing="2",
+            align="center",
+            style={
+                "text_decoration": "none",
+                "color": "var(--gray-11)",
+                "border": "1px solid #EAEAEA",
+                "border_radius": "10px",
+                "padding": "1em",
+                "width": "280px",
+                "height": "100%",
+                "_hover": {"box_shadow": "0px 4px 20px rgba(0,0,0,0.1)"},
+            }
         ),
-        spacing="3",
-        align="center",
-        justify_content="space-between",
-        style={
-            "text_decoration": "none",
-            "color": "var(--gray-11)",
-            "border": "1px solid #EAEAEA",
-            "border_radius": "10px",
-            "padding": "1em",
-            "width": "280px",
-            "height": "100%",
-            "_hover": {"box_shadow": "0px 4px 20px rgba(0,0,0,0.1)"},
-        }
+        rx.dialog.content(
+            rx.dialog.title("A Point of Motivation"),
+            rx.dialog.description(product["motivation"]),
+            rx.flex(
+                rx.dialog.close(
+                    rx.button("Close", variant="soft", color_scheme="gray"),
+                ),
+                spacing="3",
+                margin_top="16px",
+                justify="end",
+            ),
+            style={"max_width": "450px"},
+        ),
     )
+
 
 def hub_section(title: str, text_content: str, products: list[dict]):
     return rx.vstack(
@@ -320,6 +343,13 @@ def index() -> rx.Component:
                     max_width="700px", text_align="center"
                 ),
                 padding_y="3em", align="center", spacing="4",
+            ),
+
+            # Product Hubs
+            hub_section(
+                "Spirit‑Led Ambiance",
+                "Invite the purity of God’s presence into your home with these scriptures, scents, and sacred décor items.",
+                State.product_hubs["spirit_ambiance"],
             ),
             spacing="0", width="100%", align="center",
         )
