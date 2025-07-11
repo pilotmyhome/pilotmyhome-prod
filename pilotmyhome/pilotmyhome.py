@@ -210,13 +210,33 @@ class State(rx.State):
         return [p for p in self.guide_products["robotics"] if p["category"] == "landscaper"]
 
     async def fetch_verse(self):
-        """Fetch a random Bible verse from the API."""
+        """Fetch the Verse of the Day from API.Bible."""
+        api_key = "your_api_key_here"  # Replace with your actual API key from https://scripture.api.bible/
+        bible_id = "61fd76eafa1577c2-02"  # Example Bible ID (e.g., NIV)
+        verses = [
+            "JER.29.11", "PSA.23", "1COR.4.4-8", "PHP.4.13", "JHN.3.16",
+            "ROM.8.28", "ISA.41.10", "PSA.46.1", "GAL.5.22-23", "HEB.11.1",
+            "2TI.1.7", "1COR.10.13", "PRO.22.6", "ISA.40.31", "JOS.1.9",
+            "HEB.12.2", "MAT.11.28", "ROM.10.9-10", "PHP.2.3-4", "MAT.5.43-44",
+            # Add more to reach at least 31 for all days
+            "PSA.119.105", "EPH.2.8-9", "JAS.1.5", "COL.3.23", "1PE.5.7",
+            "MAT.6.33", "ROM.12.2", "PSA.37.4", "PRO.3.5-6", "1TH.5.16-18",
+            "MIC.6.8",
+        ]
+        day_index = datetime.now().day - 1
+        verse_id = verses[day_index % len(verses)]  # Cycle through list if <31 days
+
+        url = f"https://api.scripture.api.bible/v1/bibles/{bible_id}/search?query={verse_id}"
+        headers = {"api-key": api_key}
+
         try:
             async with aiohttp.ClientSession() as session:
-                async with session.get("https://bible-api.com/?random=verse") as resp:
+                async with session.get(url, headers=headers) as resp:
                     if resp.status == 200:
                         data = await resp.json()
-                        self.verse = f"{data['text']} - {data['reference']}"
+                        passage = data["data"]["passages"][0]
+                        self.verse = f"{passage['content']} - {passage['reference']}"
+                        # Handle FUMS if needed (e.g., log or send request)
                     else:
                         self.verse = "For God so loved the world... - John 3:16 (Fallback)"
         except Exception:
@@ -327,6 +347,30 @@ def base_layout(child: rx.Component) -> rx.Component:
     """Base layout wrapping content with footer."""
     return rx.vstack(child, footer(), spacing="0", align="center")
 
+def flr_callout() -> rx.Component:
+    """Creative callout for Family Life Radio endorsement."""
+    return rx.callout(
+        rx.vstack(
+            rx.text(
+                "As we pray 'Thy Kingdom come, Thy will be done on Earth as in Heaven,' my wife and I endorse Family Life Radio as a God-provided source to honor Jesus together in worship tuning sessions anytime. Join us in this active prayer by tuning in or supporting their ministry.",
+                text_align="center", size="3", color="var(--gray-11)",
+            ),
+            rx.hstack(
+                rx.link(rx.button("Tune In Now", variant="outline"), href="https://www.myflr.org/", is_external=True),
+                rx.link(rx.button("Donate", variant="outline"), href="https://www.myflr.org/membership/", is_external=True),
+                spacing="3",
+            ),
+            spacing="3",
+            align="center",
+        ),
+        icon="heart",
+        color_scheme="amber",
+        variant="surface",
+        high_contrast=True,
+        padding="1em",
+        border_radius="md",
+        max_width="600px",
+    )
 
 # -----------------------------------------------------------------------------
 # Main Pages
@@ -379,11 +423,12 @@ def index() -> rx.Component:
                 ),
                 padding_y="3em", align="center", spacing="4",
             ),
-            # Daily Verse
+            # Daily Verse with FLR Callout
             rx.vstack(
                 rx.heading("Daily Verse", size="6"),
                 rx.text(State.verse, max_width="700px", text_align="center", font_style="italic"),
-                padding_y="2em", align="center", spacing="2",
+                flr_callout(),  # Added creative callout here for visibility
+                padding_y="2em", align="center", spacing="4",
             ),
             spacing="0", width="100%", align="center",
         )
