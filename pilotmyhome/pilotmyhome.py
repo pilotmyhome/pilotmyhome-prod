@@ -552,7 +552,7 @@ def guide_robotics() -> rx.Component:
 # -----------------------------------------------------------------------------
 # App Initialization
 # -----------------------------------------------------------------------------
-app = rx.App(
+app = rx.App( 
     theme=rx.theme(
         appearance="light",
         accent_color="sky",
