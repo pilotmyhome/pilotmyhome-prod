@@ -1,6 +1,7 @@
 import reflex as rx
 from datetime import datetime
 from typing import List, Dict
+import aiohttp  # For async HTTP requests
 
 # -----------------------------------------------------------------------------
 # App State
@@ -57,7 +58,7 @@ class State(rx.State):
                 "motivation": "Breaking bread together is a sacred act. By simplifying the preparation of meals, we reduce stress and create more opportunity for meaningful conversation and connection around the dinner table, the heart of the home."
             },
             {
-                "title": "Echo Show 8 (2nd Gen, 2021 release) – 8″ HD Smart Display with 13 MP Camera",
+                "title": "Echo Show 8 (2nd Gen, 2021 release) – 8″ HD Smart Display with 13 MP Camera",
                 "image_url": "https://m.media-amazon.com/images/I/71ldF3vJclL._AC_SL1500_.jpg",
                 "affiliate_link": "https://www.amazon.com/All-New-Echo-Show-8/dp/B0BLS3Y632?tag=pilotmyhome-20",
                 "motivation": "Hospitality is a gift. This kitchen companion helps you manage recipes, video call loved ones, and organize your home with ease, empowering you to serve your family and guests with a joyful and ordered spirit."
@@ -192,6 +193,10 @@ class State(rx.State):
         ]
     }
 
+    verse: str = "Loading daily verse..."
+    email: str = ""
+    subscribed: bool = False
+
     @rx.var
     def housekeeper_products(self) -> list[dict]:
         return [p for p in self.guide_products["robotics"] if p["category"] == "housekeeper"]
@@ -204,67 +209,74 @@ class State(rx.State):
     def landscaper_products(self) -> list[dict]:
         return [p for p in self.guide_products["robotics"] if p["category"] == "landscaper"]
 
+    async def fetch_verse(self):
+        """Fetch a random Bible verse from the API."""
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get("https://bible-api.com/?random=verse") as resp:
+                    if resp.status == 200:
+                        data = await resp.json()
+                        self.verse = f"{data['text']} - {data['reference']}"
+                    else:
+                        self.verse = "For God so loved the world... - John 3:16 (Fallback)"
+        except Exception:
+            self.verse = "For God so loved the world... - John 3:16 (Fallback)"
+
+    def handle_subscribe(self, form_data: dict):
+        """Handle newsletter subscription."""
+        self.email = form_data["email"]
+        self.subscribed = True
+
 # -----------------------------------------------------------------------------
 # Reusable Components
 # -----------------------------------------------------------------------------
-def product_card(product: dict):
-    return rx.dialog.root(
+def product_card(product: dict) -> rx.Component:
+    """Render a product card with image, title, and motivation."""
+    return rx.vstack(
+        rx.link(
+            rx.image(
+                src=product["image_url"],
+                alt=f"{product['title']} - Inspired by {product['motivation'][:50]}...",
+                height="150px",
+                width="auto",
+                object_fit="contain",
+                loading="lazy",
+            ),
+            rx.text(product["title"], height="5em", text_align="center", font_weight="500", size="3"),
+            href=product["affiliate_link"],
+            is_external=True,
+            width="100%",
+        ),
         rx.vstack(
-            rx.link(
-                rx.vstack(
-                    rx.image(src=product["image_url"], alt=product["title"],
-                             height="150px", width="auto", object_fit="contain"),
-                    rx.text(product["title"], height="5em",
-                            text_align="center", font_weight="500", size="3"),
-                ),
-                href=product["affiliate_link"],
-                is_external=True,
-            ),
-            rx.spacer(min_y="0.5em"),
-            rx.dialog.trigger(
-                rx.badge(
-                    "Motivation",
-                    cursor="pointer",
-                    color_scheme="grass",
-                    variant="soft",
-                )
-            ),
-            rx.link(
-                rx.button("View on Amazon", width="100%", margin_top="0.5em"),
-                href=product["affiliate_link"],
-                is_external=True,
-                width="100%",
-            ),
-            spacing="2",
-            align="center",
-            style={
-                "text_decoration": "none",
-                "color": "var(--gray-11)",
-                "border": "1px solid #EAEAEA",
-                "border_radius": "10px",
-                "padding": "1em",
-                "width": "280px",
-                "height": "100%",
-                "_hover": {"box_shadow": "0px 4px 20px rgba(0,0,0,0.1)"},
-            }
+            rx.text("Point of Usage Wisdom", font_weight="bold", size="2"),
+            rx.text(product["motivation"], size="2", trim="both"),
+            spacing="1",
+            padding="0.5em",
+            margin_top="0.5em",
+            border_top="1px solid #EAEAEA",
+            width="100%",
+            align_items="flex-start",
         ),
-        rx.dialog.content(
-            rx.dialog.title("A Point of Motivation"),
-            rx.dialog.description(product["motivation"]),
-            rx.flex(
-                rx.dialog.close(
-                    rx.button("Close", variant="soft", color_scheme="gray"),
-                ),
-                spacing="3",
-                margin_top="16px",
-                justify="end",
-            ),
-            style={"max_width": "450px"},
-        ),
+        spacing="3",
+        align="center",
+        justify_content="space-between",
+        style={
+            "text_decoration": "none",
+            "color": "var(--gray-11)",
+            "border": "1px solid #EAEAEA",
+            "border_radius": "10px",
+            "padding": "1em",
+            "width": "280px",
+            "height": "100%",
+            "_hover": {
+                "box_shadow": "0px 4px 20px rgba(0,0,0,0.1)",
+                "transition": "box-shadow 0.3s ease",
+            },
+        }
     )
 
-
-def hub_section(title: str, text_content: str, products: list[dict]):
+def hub_section(title: str, text_content: str, products: list[dict]) -> rx.Component:
+    """Render a hub section with title, text, and product cards."""
     return rx.vstack(
         rx.heading(title, size="7"),
         rx.text(text_content, max_width="600px",
@@ -279,7 +291,8 @@ def hub_section(title: str, text_content: str, products: list[dict]):
         width="100%", padding_y="3em"
     )
 
-def footer():
+def footer() -> rx.Component:
+    """Render the footer with links, disclosure, and newsletter signup."""
     return rx.vstack(
         rx.hstack(
             rx.link("Home", href="/"),
@@ -292,20 +305,40 @@ def footer():
             font_style="italic", size="2", color="var(--gray-10)", margin_top="1em"
         ),
         rx.text(f"© {datetime.now().year} Pilot My Home", margin_top="1em"),
+        rx.cond(
+            ~State.subscribed,
+            rx.form(
+                rx.hstack(
+                    rx.input(placeholder="Enter your email", name="email"),
+                    rx.button("Subscribe"),
+                    spacing="2",
+                ),
+                on_submit=State.handle_subscribe,
+            ),
+            rx.text("Thank you for subscribing!"),
+        ),
+        rx.text("Join our family in following Christ through intentional living."),
         align="center", spacing="2",
         padding="2em", width="100%",
         background_color="var(--gray-2)"
     )
 
-def base_layout(child: rx.Component):
+def base_layout(child: rx.Component) -> rx.Component:
+    """Base layout wrapping content with footer."""
     return rx.vstack(child, footer(), spacing="0", align="center")
 
 
 # -----------------------------------------------------------------------------
 # Main Pages
 # -----------------------------------------------------------------------------
-@rx.page(route="/", title="Pilot My Home | Abundant Living with Technology")
+@rx.page(
+    route="/", 
+    title="Pilot My Home | Abundant Living with Technology",
+    meta=[{"name": "description", "content": "Christian guide to smart homes for abundant living in Jesus' truth."}],
+    on_load=State.fetch_verse,
+)
 def index() -> rx.Component:
+    """Home page with hero, mission, and daily verse."""
     return base_layout(
         rx.vstack(
             # Hero Section
@@ -327,8 +360,10 @@ def index() -> rx.Component:
                     padding="2em", 
                     height="100%",
                 ),
-                background_image="linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), "
-                                 "url('https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=2940&auto=format&fit=crop')",
+                background_image=(
+                    "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), "
+                    "url('https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=2940&auto=format&fit=crop')"
+                ),
                 background_size="cover", 
                 background_position="center",
                 width="100%", 
@@ -344,20 +379,24 @@ def index() -> rx.Component:
                 ),
                 padding_y="3em", align="center", spacing="4",
             ),
-
-            # Product Hubs
-            hub_section(
-                "Spirit‑Led Ambiance",
-                "Invite the purity of God’s presence into your home with these scriptures, scents, and sacred décor items.",
-                State.product_hubs["spirit_ambiance"],
+            # Daily Verse
+            rx.vstack(
+                rx.heading("Daily Verse", size="6"),
+                rx.text(State.verse, max_width="700px", text_align="center", font_style="italic"),
+                padding_y="2em", align="center", spacing="2",
             ),
             spacing="0", width="100%", align="center",
         )
     )
 
 
-@rx.page(route="/guides", title="Guides | Pilot My Home")
+@rx.page(
+    route="/guides", 
+    title="Guides | Pilot My Home",
+    meta=[{"name": "description", "content": "In-depth Christian guides to thoughtful smart home technology."}],
+)
 def guides() -> rx.Component:
+    """Guides listing page."""
     return base_layout(
         rx.vstack(
             rx.heading("Our Guides", size="8"),
@@ -373,9 +412,13 @@ def guides() -> rx.Component:
         )
     )
 
-# --- NEW GUIDE PAGES START HERE ---
+# --- GUIDE PAGES ---
 
-@rx.page(route="/guides/peaceful-home", title="Guide to a Peaceful Home | Pilot My Home")
+@rx.page(
+    route="/guides/peaceful-home", 
+    title="Guide to a Peaceful Home | Pilot My Home",
+    meta=[{"name": "description", "content": "Christian guide to creating a peaceful smart home."}],
+)
 def guide_peaceful_home() -> rx.Component:
     return base_layout(
         hub_section(
@@ -385,7 +428,11 @@ def guide_peaceful_home() -> rx.Component:
         )
     )
 
-@rx.page(route="/guides/connected-family", title="Guide to a Connected Family | Pilot My Home")
+@rx.page(
+    route="/guides/connected-family", 
+    title="Guide to a Connected Family | Pilot My Home",
+    meta=[{"name": "description", "content": "Use technology to strengthen family bonds in Christ."}],
+)
 def guide_connected_family() -> rx.Component:
     return base_layout(
         hub_section(
@@ -395,7 +442,11 @@ def guide_connected_family() -> rx.Component:
         )
     )
 
-@rx.page(route="/guides/abundant-kitchen", title="Guide to an Abundant Kitchen | Pilot My Home")
+@rx.page(
+    route="/guides/abundant-kitchen", 
+    title="Guide to an Abundant Kitchen | Pilot My Home",
+    meta=[{"name": "description", "content": "Steward your kitchen with smart tools for family meals."}],
+)
 def guide_abundant_kitchen() -> rx.Component:
     return base_layout(
         hub_section(
@@ -405,7 +456,11 @@ def guide_abundant_kitchen() -> rx.Component:
         )
     )
 
-@rx.page(route="/guides/spirit-led-ambiance", title="Guide to a Spirit-Led Ambiance | Pilot My Home")
+@rx.page(
+    route="/guides/spirit-led-ambiance", 
+    title="Guide to a Spirit-Led Ambiance | Pilot My Home",
+    meta=[{"name": "description", "content": "Create a home ambiance filled with God's presence."}],
+)
 def guide_spirit_led_ambiance() -> rx.Component:
     return base_layout(
         hub_section(
@@ -415,10 +470,11 @@ def guide_spirit_led_ambiance() -> rx.Component:
         )
     )
     
-# --- NEW GUIDE PAGES END HERE ---
-
-
-@rx.page(route="/guides/security", title="Home Security Guide | Pilot My Home")
+@rx.page(
+    route="/guides/security", 
+    title="Home Security Guide | Pilot My Home",
+    meta=[{"name": "description", "content": "Christian family's guide to home security and peace."}],
+)
 def guide_security() -> rx.Component:
     return base_layout(
         rx.vstack(
@@ -458,7 +514,11 @@ def guide_security() -> rx.Component:
         )
     )
 
-@rx.page(route="/guides/stewardship", title="Stewardship Guide | Pilot My Home")
+@rx.page(
+    route="/guides/stewardship", 
+    title="Stewardship Guide | Pilot My Home",
+    meta=[{"name": "description", "content": "Guide to good stewardship of time with smart tech."}],
+)
 def guide_stewardship() -> rx.Component:
     return base_layout(
         rx.vstack(
@@ -493,8 +553,13 @@ def guide_stewardship() -> rx.Component:
         )
     )
 
-@rx.page(route="/about", title="About | Pilot My Home")
+@rx.page(
+    route="/about", 
+    title="About | Pilot My Home",
+    meta=[{"name": "description", "content": "About Pilot My Home - Faith, family, and thoughtful tech."}],
+)
 def about() -> rx.Component:
+    """About page with mission and contact form."""
     return base_layout(
         rx.vstack(
             rx.heading("About Pilot My Home", size="8", text_align="center"),
@@ -518,7 +583,11 @@ def about() -> rx.Component:
         )
     )
 
-@rx.page(route="/guides/robotics", title="The Kingdom is Here: Advanced Robotics | Pilot My Home")
+@rx.page(
+    route="/guides/robotics", 
+    title="The Kingdom is Here: Advanced Robotics | Pilot My Home",
+    meta=[{"name": "description", "content": "Guide to advanced home robotics for Christian stewardship."}],
+)
 def guide_robotics() -> rx.Component:
     return base_layout(
         rx.vstack(
@@ -586,11 +655,11 @@ def guide_robotics() -> rx.Component:
 # -----------------------------------------------------------------------------
 # App Initialization
 # -----------------------------------------------------------------------------
+# Updated to latest Reflex version as of July 2025 (~v0.7.7 or newer)
 app = rx.App(
     theme=rx.theme(
         appearance="light",
-        accent_color="sky",
+        accent_color="amber",  # Warmer color for golden light symbolizing God's love
         radius="large",
     ),
 )
-#change 
