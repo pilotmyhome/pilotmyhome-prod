@@ -198,15 +198,15 @@ class State(rx.State):
     subscribed: bool = False
 
     @rx.var
-    def housekeeper_products(self) -> list[dict]:
+    def housekeeper_products(self) -> List[Dict[str, str]]:
         return [p for p in self.guide_products["robotics"] if p["category"] == "housekeeper"]
 
     @rx.var
-    def companion_products(self) -> list[dict]:
+    def companion_products(self) -> List[Dict[str, str]]:
         return [p for p in self.guide_products["robotics"] if p["category"] == "companion"]
 
     @rx.var
-    def landscaper_products(self) -> list[dict]:
+    def landscaper_products(self) -> List[Dict[str, str]]:
         return [p for p in self.guide_products["robotics"] if p["category"] == "landscaper"]
 
     async def fetch_verse(self):
@@ -603,7 +603,7 @@ def guide_robotics() -> rx.Component:
                 ),
                 rx.flex(
                     rx.foreach(
-                        State.housekeeper_products,
+                        State.housekeeper_products.to(List[Dict[str, str]]),
                         product_card
                     ),
                     spacing="5", padding_y="2em",
@@ -619,7 +619,7 @@ def guide_robotics() -> rx.Component:
                 ),
                 rx.flex(
                     rx.foreach(
-                        State.companion_products,
+                        State.companion_products.to(List[Dict[str, str]]),
                         product_card
                     ),
                     spacing="5", padding_y="2em",
@@ -635,7 +635,7 @@ def guide_robotics() -> rx.Component:
                 ),
                 rx.flex(
                     rx.foreach(
-                        State.landscaper_products, 
+                        State.landscaper_products.to(List[Dict[str, str]]), 
                         product_card
                     ),
                     spacing="5", padding_y="2em",
