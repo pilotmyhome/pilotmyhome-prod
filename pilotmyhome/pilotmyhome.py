@@ -372,6 +372,7 @@ def flr_callout() -> rx.Component:
             ),
             spacing="3",
             align="center",
+        ),
         icon="heart",
         color_scheme="amber",
         variant="surface",
@@ -630,7 +631,7 @@ def guide_stewardship() -> rx.Component:
             
             rx.vstack(
                 rx.text(
-                    "Time is one of the most precious resources God has given us. As families striving to live intentionally, being good stewards of our time allows us to focus on what truly matters: our faith, our relationships, and our purpose. While technology can often feel like a distraction, it can also be a powerful ally in automating the mundane tasks of daily life freeing up hours each week for more meaningful pursuits."
+                    "Time is one of the most precious resources God has given us. As families striving to live intentionally, being good stewards of our time allows us to focus on what truly matters: our faith, our relationships, and our purpose. While technology can often feel like a distraction, it can also be a powerful ally in automating the mundane tasks of daily life, freeing up hours each week for more meaningful pursuits."
                 ),
                 rx.heading("Automating the Home Base", size="6", padding_top="1em"),
                 rx.text(
@@ -706,7 +707,7 @@ def guide_robotics() -> rx.Component:
                 ),
                 rx.flex(
                     rx.foreach(
-                        State.housekeeper_products.to(List[Dict[str, str]]),
+                        State.housekeeper_products,
                         product_card
                     ),
                     spacing="5", padding_y="2em",
@@ -722,7 +723,7 @@ def guide_robotics() -> rx.Component:
                 ),
                 rx.flex(
                     rx.foreach(
-                        State.companion_products.to(List[Dict[str, str]]),
+                        State.companion_products,
                         product_card
                     ),
                     spacing="5", padding_y="2em",
@@ -738,7 +739,7 @@ def guide_robotics() -> rx.Component:
                 ),
                 rx.flex(
                     rx.foreach(
-                        State.landscaper_products.to(List[Dict[str, str]]), 
+                        State.landscaper_products, 
                         product_card
                     ),
                     spacing="5", padding_y="2em",
@@ -758,7 +759,7 @@ def guide_robotics() -> rx.Component:
 # -----------------------------------------------------------------------------
 # App Initialization
 # -----------------------------------------------------------------------------
-# Updated to latest Reflex version as of July 2025 (~v0.5.7 or newer)
+# Updated to latest Reflex version as of July 2025 (~v0.8.2 or newer)
 app = rx.App(
     theme=rx.theme(
         appearance="light",
