@@ -798,5 +798,5 @@ app = rx.App(
         accent_color="blue",  # Changed to blue to match X.com
         radius="large",
     ),
-    styles={"body": {"background": "white"}},
+    style={"body": {"background": "white"}},
 )
