@@ -257,6 +257,9 @@ class State(rx.State):
         self.email = form_data["email"]
         self.subscribed = True
 
+    def scroll_guide(self, delta: int):
+        return rx.window().eval(f'document.getElementById("guide_scroll").scrollBy(0, {delta})')
+
 # -----------------------------------------------------------------------------
 # Reusable Components
 # -----------------------------------------------------------------------------
@@ -444,15 +447,44 @@ def index() -> rx.Component:
                                 rx.foreach(State.guides, tweet_card),
                                 spacing="0",
                             ),
+                            id="guide_scroll",
                             scrollbars="vertical",
                         ),
+                        rx.icon(
+                            tag="chevron_up",
+                            size=20,
+                            on_click=lambda: State.scroll_guide(-150),
+                            style={
+                                "position": "absolute",
+                                "top": "10px",
+                                "right": "10px",
+                                "opacity": 0.5,
+                                "cursor": "pointer",
+                                "color": "var(--gray-11)",
+                            },
+                        ),
+                        rx.icon(
+                            tag="chevron_down",
+                            size=20,
+                            on_click=lambda: State.scroll_guide(150),
+                            style={
+                                "position": "absolute",
+                                "bottom": "10px",
+                                "right": "10px",
+                                "opacity": 0.5,
+                                "cursor": "pointer",
+                                "color": "var(--gray-11)",
+                            },
+                        ),
                         style=dict(
-                            aspect_ratio="16/9",
+                            height="400px",
                             width="100%",
                             max_width="600px",
                             border="1px solid var(--gray-6)",
                             border_radius="md",
                             overflow="hidden",
+                            position="relative",
+                            background="white",
                         ),
                         margin_top="1em",
                     ),
@@ -763,7 +795,8 @@ def guide_robotics() -> rx.Component:
 app = rx.App(
     theme=rx.theme(
         appearance="light",
-        accent_color="amber",  # Warmer color for golden light symbolizing God's love
+        accent_color="blue",  # Changed to blue to match X.com
         radius="large",
     ),
+    styles={"body": {"background": "white"}},
 )
