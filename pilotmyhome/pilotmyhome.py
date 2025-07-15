@@ -193,6 +193,16 @@ class State(rx.State):
         ]
     }
 
+    guides: List[Dict[str, str]] = [
+        {"title": "A Guide to a Peaceful Home", "link": "/guides/peaceful-home"},
+        {"title": "A Guide to a Connected Family", "link": "/guides/connected-family"},
+        {"title": "A Guide to an Abundant Kitchen", "link": "/guides/abundant-kitchen"},
+        {"title": "A Guide to a Spirit-Led Ambiance", "link": "/guides/spirit-led-ambiance"},
+        {"title": "A Christian Family's Guide to Home Security & Peace of Mind", "link": "/guides/security"},
+        {"title": "Good Stewardship of Time: A Guide", "link": "/guides/stewardship"},
+        {"title": "The Kingdom is Here: A Guide to Advanced Home Robotics", "link": "/guides/robotics"},
+    ]
+
     verse: str = "Loading daily verse..."
     email: str = ""
     subscribed: bool = False
@@ -362,7 +372,6 @@ def flr_callout() -> rx.Component:
             ),
             spacing="3",
             align="center",
-        ),
         icon="heart",
         color_scheme="amber",
         variant="surface",
@@ -370,6 +379,41 @@ def flr_callout() -> rx.Component:
         padding="1em",
         border_radius="md",
         max_width="600px",
+    )
+
+def tweet_card(guide: Dict[str, str]) -> rx.Component:
+    """Render a guide link styled as an X.com post."""
+    return rx.box(
+        rx.hstack(
+            rx.avatar(fallback="PMH", size="3", variant="soft"),
+            rx.vstack(
+                rx.hstack(
+                    rx.text("Pilot My Home", font_weight="bold", size="3"),
+                    rx.text("@pilotmyhome", color="gray", size="2"),
+                    rx.text("· 1d", color="gray", size="2"),
+                    spacing="2",
+                ),
+                rx.text(guide["title"], size="4"),
+                rx.link("Read the guide", href=guide["link"], color="blue", size="3"),
+                rx.hstack(
+                    rx.icon(tag="message-circle", size=16, color="gray"),
+                    rx.text("0", color="gray", size="2"),
+                    rx.icon(tag="repeat", size=16, color="gray"),
+                    rx.text("0", color="gray", size="2"),
+                    rx.icon(tag="heart", size=16, color="gray"),
+                    rx.text("0", color="gray", size="2"),
+                    rx.icon(tag="share", size=16, color="gray"),
+                    spacing="4",
+                ),
+                spacing="1",
+                width="100%",
+            ),
+            spacing="3",
+            align="start",
+        ),
+        border_bottom="1px solid var(--gray-4)",
+        padding="1em",
+        width="100%",
     )
 
 # -----------------------------------------------------------------------------
@@ -393,9 +437,23 @@ def index() -> rx.Component:
                     rx.text(
                         "Guiding Christian families to live more peacefully and intentionally with today's technology.",
                         size="5", color="white"),
-                    rx.link(
-                        rx.button("Explore Our Guides", size="3", margin_top="1em"),
-                        href="/guides",
+                    rx.box(
+                        rx.scroll_area(
+                            rx.vstack(
+                                rx.foreach(State.guides, tweet_card),
+                                spacing="0",
+                            ),
+                            scrollbars="vertical",
+                        ),
+                        style=dict(
+                            aspect_ratio="16/9",
+                            width="100%",
+                            max_width="600px",
+                            border="1px solid var(--gray-6)",
+                            border_radius="md",
+                            overflow="hidden",
+                        ),
+                        margin_top="1em",
                     ),
                     align="center", 
                     justify="center", 
@@ -572,7 +630,7 @@ def guide_stewardship() -> rx.Component:
             
             rx.vstack(
                 rx.text(
-                    "Time is one of the most precious resources God has given us. As families striving to live intentionally, being good stewards of our time allows us to focus on what truly matters: our faith, our relationships, and our purpose. While technology can often feel like a distraction, it can also be a powerful ally in automating the mundane tasks of daily life, freeing up hours each week for more meaningful pursuits."
+                    "Time is one of the most precious resources God has given us. As families striving to live intentionally, being good stewards of our time allows us to focus on what truly matters: our faith, our relationships, and our purpose. While technology can often feel like a distraction, it can also be a powerful ally in automating the mundane tasks of daily life freeing up hours each week for more meaningful pursuits."
                 ),
                 rx.heading("Automating the Home Base", size="6", padding_top="1em"),
                 rx.text(
@@ -611,7 +669,7 @@ def about() -> rx.Component:
             rx.vstack(
                 rx.heading("Our Mission", size="6", padding_top="1em"),
                 rx.text(
-                    "Welcome to Pilot My Home! We are a husband and wife team dedicated to our faith, our family, and the incredible potential of technology to enrich our lives. We started Pilot My Home to share our journey and help other Christian families navigate the world of smart home devices.",
+                    "Welcome to Pilot My Home! We are a husband and wife team dedicated to our faith, our family, and the incredible potential of technology to enrich our lives. We started Pilot My Home to share our journey and help other Christian families navigate the world of smart home devices."
                 ),
                 rx.text(
                     "Our goal is to provide honest guidance on how these tools can be used not as a distraction, but as a way to create a more peaceful, secure, and intentional home environment. We believe that by thoughtfully automating daily tasks and simplifying our routines, we can be better stewards of our time, freeing us up for what truly matters: fellowship, prayer, and family."
@@ -700,7 +758,7 @@ def guide_robotics() -> rx.Component:
 # -----------------------------------------------------------------------------
 # App Initialization
 # -----------------------------------------------------------------------------
-# Updated to latest Reflex version as of July 2025 (~v0.7.7 or newer)
+# Updated to latest Reflex version as of July 2025 (~v0.5.7 or newer)
 app = rx.App(
     theme=rx.theme(
         appearance="light",
