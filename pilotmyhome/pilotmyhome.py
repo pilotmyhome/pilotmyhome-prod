@@ -1,7 +1,7 @@
 import reflex as rx
 from datetime import datetime
 from typing import List, Dict
-import aiohttp  # For async HTTP requests
+import aiohttp
 
 # -----------------------------------------------------------------------------
 # App State
@@ -9,215 +9,268 @@ import aiohttp  # For async HTTP requests
 class State(rx.State):
     """The application state."""
 
-    product_hubs: Dict[str, List[Dict[str, str]]] = {
-        "peaceful_home": [
-            {
-                "title": "Ring Battery Doorbell with Head‑to‑Toe Video – Satin Nickel",
-                "image_url": "https://m.media-amazon.com/images/I/519N1IBi3iL._SY450_.jpg",
-                "affiliate_link": "https://www.amazon.com/Ring-Battery-Doorbell-Head-to-Toe-Video-Satin-Nickel/dp/B0BZWRSRWV?tag=pilotmyhome-20",
-                "motivation": "The Bible calls us to be wise and vigilant. Guarding the threshold of your home is an act of stewardship, creating a sanctuary of peace where your family can flourish without fear, welcoming guests with confidence."
-            },
-            {
-                "title": "Philips Hue Smart 60W A19 LED Bulb – White Ambiance (Bluetooth)",
-                "image_url": "https://m.media-amazon.com/images/I/611-Y8IALHL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Philips-Hue-Bluetooth-compatible-Assistant/dp/B07QV9XLSD?tag=pilotmyhome-20",
-                "motivation": "As we are called to be a light in the world, let us first cultivate light within our homes. Use your home's atmosphere to set aside moments for peace, prayer, and warm fellowship, letting your light shine for others to see."
-            },
-            {
-                "title": "roborock Q7 M5 Robot Vacuum and Mop Combo, 10 000 Pa HyperForce",
-                "image_url": "https://m.media-amazon.com/images/I/7162dbcZW3L._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/roborock-Q7-M5-Anti-Tangle-APP-Controlled/dp/B0DSJ93KPD?tag=pilotmyhome-20",
-                "motivation": "Our time is a precious gift from God. By being good stewards of our minutes and automating the mundane, we reclaim time not for idleness, but for purpose: for family, for prayer, and for serving others with renewed energy."
-            },
-        ],
-        "connected_family": [
-            {
-                "title": "Aura Digital Picture Frame – 10.1″ HD Mat Display, Unlimited Storage",
-                "image_url": "https://m.media-amazon.com/images/I/71WSCdw8rJL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Digital-Picture-Unlimited-Storage-Anywhere/dp/B09X2CL5HG?tag=pilotmyhome-20",
-                "motivation": "Let your home tell a story of gratitude. A digital frame becomes a living testament to God's blessings, displaying a rotating gallery of cherished moments and loved ones, reminding us daily of the joy He has given."
-            },
-            {
-                "title": "Anker NEBULA Capsule Smart Wi‑Fi Mini Projector (100 ANSI lumen)",
-                "image_url": "https://m.media-amazon.com/images/I/610dDc+YfDL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Projector-Anker-Portable-High-Contrast-Playtime/dp/B076Q3GBJK?tag=pilotmyhome-20",
-                "motivation": "Fellowship is a cornerstone of a faith-filled life. This tool helps transform any room into a place for shared, wholesome experiences, strengthening family bonds one movie night or shared presentation at a time."
-            },
-            {
-                "title": "Amazon Echo Dot (5th Gen, 2022 Release) Glacier White",
-                "image_url": "https://m.media-amazon.com/images/I/7116ea3BmTL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Amazon-release-vibrant-helpful-routines/dp/B09B94RL1R?tag=pilotmyhome-20",
-                "motivation": "The book of Proverbs speaks of the power of a timely word. Use this helper to fill your home with worship music, listen to the Word of God, or set reminders for prayer, intentionally inviting His presence into your daily rhythm."
-            },
-        ],
-        "abundant_kitchen": [
-            {
-                "title": "Instant Pot Duo Crisp 11‑in‑1 Air Fryer & Pressure Cooker, 6 Qt",
-                "image_url": "https://m.media-amazon.com/images/I/81vc3qXKPpL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Instant-Pot-Multi-Use-Pressure-Cooker/dp/B08WCLJ7JG?tag=pilotmyhome-20",
-                "motivation": "Breaking bread together is a sacred act. By simplifying the preparation of meals, we reduce stress and create more opportunity for meaningful conversation and connection around the dinner table, the heart of the home."
-            },
-            {
-                "title": "Echo Show 8 (2nd Gen, 2021 release) – 8″ HD Smart Display with 13 MP Camera",
-                "image_url": "https://m.media-amazon.com/images/I/71ldF3vJclL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/All-New-Echo-Show-8/dp/B0BLS3Y632?tag=pilotmyhome-20",
-                "motivation": "Hospitality is a gift. This kitchen companion helps you manage recipes, video call loved ones, and organize your home with ease, empowering you to serve your family and guests with a joyful and ordered spirit."
-            },
-        ],
-        "spirit_ambiance": [
-            {
-                "title": "The Battle Is Not Yours - Warrior Christian Wall Art Print, Angel Inspirational Bible Verse Art",
-                "image_url": "https://m.media-amazon.com/images/I/71qQE25MhBL._SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Battle-Not-Yours-Inspirational-Motivational/dp/B0F2VSXLXV?tag=pilotmyhome-20",
-                "motivation": "Surround your family with visual reminders of God's promises. This artwork serves as a daily declaration of faith, reinforcing the truth that our strength comes from Him, and our battles are ultimately in His hands."
-            },
-            {
-                "title": "Wooden Scripture Prayer Bowl for Home Decor – Christian Tabletop Centerpiece",
-                "image_url": "https://m.media-amazon.com/images/I/81iWvF9qS3L._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/P-Graham-Dunn-Acacia-Wood-Scripture/dp/B0B6W5M2G4?tag=pilotmyhome-20",
-                "motivation": "Prayer is our direct line to the Father. A prayer bowl creates a physical space for the spiritual discipline of intercession, encouraging family members to write down and lift up their praises and petitions together."
-            },
-            {
-                "title": "Bible‑Verse Scented Candle Set (36 Tins) – Scripture Aroma Candles",
-                "image_url": "https://m.media-amazon.com/images/I/81urHfEWxVL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Threlaco-Christian-Scripture-Birthday-Graduation/dp/B0CRKTPTWY?tag=pilotmyhome-20",
-                "motivation": "Engage all senses in worship. The gentle light and pleasant aroma of a candle can transform a space, quieting the mind and preparing the heart for devotion, scripture reading, or a moment of peaceful reflection."
-            },
-        ]
-    }
-    
-    guide_products: Dict[str, List[Dict[str, str]]] = {
-        "security": [
-            {
-                "title": "Ring Battery Doorbell with Head‑to‑Toe Video – Satin Nickel",
-                "image_url": "https://m.media-amazon.com/images/I/519N1IBi3iL._SY450_.jpg",
-                "affiliate_link": "https://www.amazon.com/Ring-Battery-Doorbell-Head-to-Toe-Video-Satin-Nickel/dp/B0BZWRSRWV?tag=pilotmyhome-20",
-                "motivation": "The Bible calls us to be wise as serpents and innocent as doves. Guarding the threshold of your home is an act of wisdom, creating a sanctuary of peace where your family can flourish without fear.",
-                "category": "security"
-            },
-            {
-                "title": "Blink Outdoor 4 (4th Gen) – Wire-free smart security camera",
-                "image_url": "https://m.media-amazon.com/images/I/61s4s6sXyIL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Blink-Outdoor-4th-Gen-Wire-free/dp/B0B12C2N2X?tag=pilotmyhome-20",
-                "motivation": "Good stewardship extends to the property God has blessed us with. A watchful eye over your home provides not just security, but also the peace of mind that allows you to rest, knowing you've taken practical steps to protect your family.",
-                "category": "security"
-            },
-            {
-                "title": "eufy Security S220 SoloCam, Wireless Outdoor Security Camera",
-                "image_url": "https://m.media-amazon.com/images/I/61Vd6v-0gmL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/eufy-Security-S220-SoloCam-Spotlight/dp/B09T92N52N?tag=pilotmyhome-20",
-                "motivation": "Let your peace not be disturbed by worry. Tools that provide awareness of your surroundings free your mind from 'what-ifs', allowing you to be more present and focused on your family and your walk with God.",
-                "category": "security"
-            },
-        ],
-        "stewardship": [
-            {
-                "title": "roborock Q7 M5 Robot Vacuum and Mop Combo, 10 000 Pa HyperForce",
-                "image_url": "https://m.media-amazon.com/images/I/7162dbcZW3L._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/roborock-Q7-M5-Anti-Tangle-APP-Controlled/dp/B0DSJ93KPD?tag=pilotmyhome-20",
-                "motivation": "Our time is a precious gift from God. By being good stewards of our minutes and automating the mundane, we reclaim time not for idleness, but for purpose: for family, for prayer, and for serving others with renewed energy.",
-                "category": "stewardship"
-            },
-            {
-                "title": "Instant Pot Duo Crisp 11‑in‑1 Air Fryer & Pressure Cooker, 6 Qt",
-                "image_url": "https://m.media-amazon.com/images/I/81vc3qXKPpL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Instant-Pot-Multi-Use-Pressure-Cooker/dp/B08WCLJ7JG?tag=pilotmyhome-20",
-                "motivation": "Breaking bread together is a sacred act. By simplifying the preparation of meals, we reduce stress and create more opportunity for meaningful conversation and connection around the dinner table, the heart of the home.",
-                "category": "stewardship"
-            },
-            {
-                "title": "Amazon Echo Dot (5th Gen, 2022 Release) Glacier White",
-                "image_url": "https://m.media-amazon.com/images/I/7116ea3BmTL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Amazon-release-vibrant-helpful-routines/dp/B09B94RL1R?tag=pilotmyhome-20",
-                "motivation": "The book of Proverbs speaks of the power of a timely word. Use this helper to fill your home with worship music, listen to the Word of God, or set reminders for prayer, intentionally inviting His presence into your daily rhythm.",
-                "category": "stewardship"
-            },
-        ],
-        "robotics": [
-            {
-                "title": "Roborock S8 MaxV Ultra",
-                "image_url": "https://m.media-amazon.com/images/I/712iLYEEb3L._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/roborock-S8-MaxV-Ultra-Self-Drying/dp/B0CQLPNB2X?tag=pilotmyhome-20",
-                "motivation": "The Kingdom of God is one of peace and order. By delegating the constant task of maintaining a clean foundation for our home, we act as wise stewards of our God-given energy, focusing less on the dust of the world and more on cultivating a sanctuary of peace.",
-                "category": "housekeeper"
-            },
-            {
-                "title": "ECOVACS DEEBOT T50 PRO Omni Robot Vacuum and Mop, 3.19",
-                "image_url": "https://m.media-amazon.com/images/I/610I+9D8U6L._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/ECOVACS-T50-PRO-Ultra-Slim-Self-Emptying/dp/B0DSB92P1N?tag=pilotmyhome-20",
-                "motivation": "A well-ordered home that is ready to welcome others is an act of hospitality and love. Automating the core of our home's cleanliness prepares our hearts and our space to be present for fellowship, unburdened by the stress of pending chores.",
-                "category": "housekeeper"
-            },
-            {
-                "title": "eufy Robot Vacuum Omni C20",
-                "image_url": "https://m.media-amazon.com/images/I/7162dbcZW3L._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/eufy-Emptying-hands-free-3-35-Inch-Ultra-Slim/dp/B0DCFNZF32?tag=pilotmyhome-20",
-                "motivation": "'Whatever you do, work at it with all your heart, as working for the Lord' (Colossians 3:23). Using intelligent tools to maintain our homes with excellence is a modern way to honor this principle, serving our family with diligence.",
-                "category": "housekeeper"
-            },
-            {
-                "title": "Amazon Astro",
-                "image_url": "https://m.media-amazon.com/images/I/61fPLtmoSNL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/introducing-amazon-astro-household-robot-with-intelligent-motion/dp/B078NS8H82?tag=pilotmyhome-20",
-                "motivation": "A 'helper' is a deeply biblical concept. This automaton can act as a central hub, a tireless helper that assists in managing daily tasks, connecting with loved ones, and guarding the home—a modern tool for a well-managed household.",
-                "category": "companion"
-            },
-            {
-                "title": "Enabot Home Security Camera",
-                "image_url": "https://m.media-amazon.com/images/I/619BkgEoP1L._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Enabot-Security-Wireless-Self-Charging-Detection/dp/B09R6V3CJM?tag=pilotmyhome-20",
-                "motivation": "The fifth commandment instructs us to honor our parents. Technology can be a bridge for compassionate care, allowing us to lovingly watch over elderly family members and fulfill our duty of care with peace of mind.",
-                "category": "companion"
-            },
-            {
-                "title": "Loona: The Smart Robot Pet",
-                "image_url": "https://m.media-amazon.com/images/I/71D9dLT8xfL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Loona-ChatGPT-4o-AI-Powered-Interaction-Monitoring/dp/B0DCF53PCH?tag=pilotmyhome-20",
-                "motivation": "God's creation is filled with joy and personality. A robotic pet can be a source of innocent joy and laughter, reminding us of the importance of play and lighthearted connection in a loving home.",
-                "category": "companion"
-            },
-            {
-                "title": "Husqvarna Automower 415X Robotic Lawn Mower",
-                "image_url": "https://m.media-amazon.com/images/I/61YL4bgni8L._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/Husqvarna-Navigation-Installation-Ultra-Quiet-Technology/dp/B09WNDLXJL?tag=pilotmyhome-20",
-                "motivation": "From Eden, humanity was tasked with tending creation. Automating the care of our property is an act of modern stewardship, creating a well-ordered space for our families to enjoy and for offering hospitality to others.",
-                "category": "landscaper"
-            },
-            {
-                "title": "Segway Navimow H-Series",
-                "image_url": "https://m.media-amazon.com/images/I/61EDud-50eL._AC_SL1500_.jpg",
-                "affiliate_link": "https://www.amazon.com/i105N-Perimeter-AI-Assisted-Multi-Zone-Management/dp/B0CX8LL2PC?tag=pilotmyhome-20",
-                "motivation": "'Let all things be done decently and in order' (1 Corinthians 14:40). Applying this principle to our homes creates an external environment that reflects inner peace. Precise, automated tools help achieve this order, freeing our time for higher callings.",
-                "category": "landscaper"
-            },
-        ]
-    }
-
-    guides: List[Dict[str, str]] = [
-        {"title": "A Guide to a Peaceful Home", "link": "/guides/peaceful-home"},
-        {"title": "A Guide to a Connected Family", "link": "/guides/connected-family"},
-        {"title": "A Guide to an Abundant Kitchen", "link": "/guides/abundant-kitchen"},
-        {"title": "A Guide to a Spirit-Led Ambiance", "link": "/guides/spirit-led-ambiance"},
-        {"title": "A Christian Family's Guide to Home Security & Peace of Mind", "link": "/guides/security"},
-        {"title": "Good Stewardship of Time: A Guide", "link": "/guides/stewardship"},
-        {"title": "The Kingdom is Here: A Guide to Advanced Home Robotics", "link": "/guides/robotics"},
+    # Combined and simplified data structure for all guides and their products
+    # Each dictionary in this list represents a guide
+    guides_data: List[Dict[str, any]] = [
+        {
+            "id": "home_main", # Special ID for the main home page "hero" section if needed
+            "title": "Welcome to Pilot My Home!",
+            "description": "Guiding Christian families to live more peacefully and intentionally with today's technology.",
+            "icon": "home",
+            "products": [], # No products directly associated with this "post"
+        },
+        {
+            "id": "peaceful_home",
+            "title": "A Guide to a Peaceful Home",
+            "description": "Create a sanctuary of calm and security. These tools help protect your home and automate daily tasks, giving you priceless peace of mind.",
+            "icon": "home", # Reusing icon, adjust if a more specific one is desired
+            "products": [
+                {
+                    "title": "Ring Battery Doorbell with Head‑to‑Toe Video – Satin Nickel",
+                    "image_url": "https://m.media-amazon.com/images/I/519N1IBi3iL._SY450_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Ring-Battery-Doorbell-Head-to-Toe-Video-Satin-Nickel/dp/B0BZWRSRWV?tag=pilotmyhome-20",
+                    "motivation": "The Bible calls us to be wise and vigilant. Guarding the threshold of your home is an act of stewardship, creating a sanctuary of peace where your family can flourish without fear, welcoming guests with confidence."
+                },
+                {
+                    "title": "Philips Hue Smart 60W A19 LED Bulb – White Ambiance (Bluetooth)",
+                    "image_url": "https://m.media-amazon.com/images/I/611-Y8IALHL._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Philips-Hue-Bluetooth-compatible-Assistant/dp/B07QV9XLSD?tag=pilotmyhome-20",
+                    "motivation": "As we are called to be a light in the world, let us first cultivate light within our homes. Use your home's atmosphere to set aside moments for peace, prayer, and warm fellowship, letting your light shine for others to see."
+                },
+                {
+                    "title": "roborock Q7 M5 Robot Vacuum and Mop Combo, 10 000 Pa HyperForce",
+                    "image_url": "https://m.media-amazon.com/images/I/7162dbcZW3L._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/roborock-Q7-M5-Anti-Tangle-APP-Controlled/dp/B0DSJ93KPD?tag=pilotmyhome-20",
+                    "motivation": "Our time is a precious gift from God. By being good stewards of our minutes and automating the mundane, we reclaim time not for idleness, but for purpose: for family, for prayer, and for serving others with renewed energy."
+                },
+            ],
+        },
+        {
+            "id": "connected_family",
+            "title": "A Guide to a Connected Family",
+            "description": "In a world of digital distraction, use technology to bring your family closer together. These picks are designed for shared experiences.",
+            "icon": "users",
+            "products": [
+                {
+                    "title": "Aura Digital Picture Frame – 10.1″ HD Mat Display, Unlimited Storage",
+                    "image_url": "https://m.media-amazon.com/images/I/71WSCdw8rJL._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Digital-Picture-Unlimited-Storage-Anywhere/dp/B09X2CL5HG?tag=pilotmyhome-20",
+                    "motivation": "Let your home tell a story of gratitude. A digital frame becomes a living testament to God's blessings, displaying a rotating gallery of cherished moments and loved ones, reminding us daily of the joy He has given."
+                },
+                {
+                    "title": "Anker NEBULA Capsule Smart Wi‑Fi Mini Projector (100 ANSI lumen)",
+                    "image_url": "https://m.media-amazon.com/images/I/610dDc+YfDL._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Projector-Anker-Portable-High-Contrast-Playtime/dp/B076Q3GBJK?tag=pilotmyhome-20",
+                    "motivation": "Fellowship is a cornerstone of a faith-filled life. This tool helps transform any room into a place for shared, wholesome experiences, strengthening family bonds one movie night or shared presentation at a time."
+                },
+                {
+                    "title": "Amazon Echo Dot (5th Gen, 2022 Release) Glacier White",
+                    "image_url": "https://m.media-amazon.com/images/I/7116ea3BmTL._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Amazon-release-vibrant-helpful-routines/dp/B09B94RL1R?tag=pilotmyhome-20",
+                    "motivation": "The book of Proverbs speaks of the power of a timely word. Use this helper to fill your home with worship music, listen to the Word of God, or set reminders for prayer, intentionally inviting His presence into your daily rhythm."
+                },
+            ],
+        },
+        {
+            "id": "abundant_kitchen",
+            "title": "A Guide to an Abundant Kitchen",
+            "description": "The kitchen is the heart of the home. Steward your resources well and simplify mealtime with technology that serves your family.",
+            "icon": "chef-hat",
+            "products": [
+                {
+                    "title": "Instant Pot Duo Crisp 11‑in‑1 Air Fryer & Pressure Cooker, 6 Qt",
+                    "image_url": "https://m.media-amazon.com/images/I/81vc3qXKPpL._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Instant-Pot-Multi-Use-Pressure-Cooker/dp/B08WCLJ7JG?tag=pilotmyhome-20",
+                    "motivation": "Breaking bread together is a sacred act. By simplifying the preparation of meals, we reduce stress and create more opportunity for meaningful conversation and connection around the dinner table, the heart of the home."
+                },
+                {
+                    "title": "Echo Show 8 (2nd Gen, 2021 release) – 8″ HD Smart Display with 13 MP Camera",
+                    "image_url": "https://m.media-amazon.com/images/I/71ldF3vJclL._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/All-New-Echo-Show-8/dp/B0BLS3Y632?tag=pilotmyhome-20",
+                    "motivation": "Hospitality is a gift. This kitchen companion helps you manage recipes, video call loved ones, and organize your home with ease, empowering you to serve your family and guests with a joyful and ordered spirit."
+                },
+            ],
+        },
+        {
+            "id": "spirit_ambiance",
+            "title": "A Guide to a Spirit-Led Ambiance",
+            "description": "Invite the purity of God’s presence into your home with these scriptures, scents, and sacred décor items.",
+            "icon": "lightbulb",
+            "products": [
+                {
+                    "title": "The Battle Is Not Yours - Warrior Christian Wall Art Print, Angel Inspirational Bible Verse Art",
+                    "image_url": "https://m.media-amazon.com/images/I/71qQE25MhBL._SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Battle-Not-Yours-Inspirational-Motivational/dp/B0F2VSXLXV?tag=pilotmyhome-20",
+                    "motivation": "Surround your family with visual reminders of God's promises. This artwork serves as a daily declaration of faith, reinforcing the truth that our strength comes from Him, and our battles are ultimately in His hands."
+                },
+                {
+                    "title": "Wooden Scripture Prayer Bowl for Home Decor – Christian Tabletop Centerpiece",
+                    "image_url": "https://m.media-amazon.com/images/I/81iWvF9qS3L._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/P-Graham-Dunn-Acacia-Wood-Scripture/dp/B0B6W5M2G4?tag=pilotmyhome-20",
+                    "motivation": "Prayer is our direct line to the Father. A prayer bowl creates a physical space for the spiritual discipline of intercession, encouraging family members to write down and lift up their praises and petitions together."
+                },
+                {
+                    "title": "Bible‑Verse Scented Candle Set (36 Tins) – Scripture Aroma Candles",
+                    "image_url": "https://m.media-amazon.com/images/I/81urHfEWxVL._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Threlaco-Christian-Scripture-Birthday-Graduation/dp/B0CRKTPTWY?tag=pilotmyhome-20",
+                    "motivation": "Engage all senses in worship. The gentle light and pleasant aroma of a candle can transform a space, quieting the mind and preparing the heart for devotion, scripture reading, or a moment of peaceful reflection."
+                },
+            ],
+        },
+        {
+            "id": "security",
+            "title": "A Christian Family's Guide to Home Security & Peace of Mind",
+            "description": "Our homes are our sanctuaries—a gift we are called to steward wisely. In today's world, that stewardship includes being thoughtful about security. When you Ask God to save you,  don't ignore His gift of Wisdom. This isn't about living in fear, but about creating an environment of peace and safety where your family can flourish. Modern technology, when chosen and used intentionally, can be a powerful tool in piloting a secure and peaceful home.",
+            "icon": "shield-check",
+            "products": [
+                {
+                    "title": "Ring Battery Doorbell with Head‑to‑Toe Video – Satin Nickel",
+                    "image_url": "https://m.media-amazon.com/images/I/519N1IBi3iL._SY450_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Ring-Battery-Doorbell-Head-to-Toe-Video-Satin-Nickel/dp/B0BZWRSRWV?tag=pilotmyhome-20",
+                    "motivation": "The Bible calls us to be wise as serpents and innocent as doves. Guarding the threshold of your home is an act of wisdom, creating a sanctuary of peace where your family can flourish without fear."
+                },
+                {
+                    "title": "Blink Outdoor 4 (4th Gen) – Wire-free smart security camera",
+                    "image_url": "https://m.media-amazon.com/images/I/61s4s6sXyIL._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Blink-Outdoor-4th-Gen-Wire-free/dp/B0B12C2N2X?tag=pilotmyhome-20",
+                    "motivation": "Good stewardship extends to the property God has blessed us with. A watchful eye over your home provides not just security, but also the peace of mind that allows you to rest, knowing you've taken practical steps to protect your family."
+                },
+                {
+                    "title": "eufy Security S220 SoloCam, Wireless Outdoor Security Camera",
+                    "image_url": "https://m.media-amazon.com/images/I/61Vd6v-0gmL._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/eufy-Security-S220-SoloCam-Spotlight/dp/B09T92N52N?tag=pilotmyhome-20",
+                    "motivation": "Let your peace not be disturbed by worry. Tools that provide awareness of your surroundings free your mind from 'what-ifs', allowing you to be more present and focused on your family and your walk with God."
+                },
+            ],
+        },
+        {
+            "id": "stewardship",
+            "title": "Good Stewardship of Time: A Guide",
+            "description": "Time is one of the most precious resources God has given us. As families striving to live intentionally, being good stewards of our time allows us to focus on what truly matters: our faith, our relationships, and our purpose. While technology can often feel like a distraction, it can also be a powerful ally in automating the mundane tasks of daily life, freeing up hours each week for more meaningful pursuits.",
+            "icon": "clock",
+            "products": [
+                {
+                    "title": "roborock Q7 M5 Robot Vacuum and Mop Combo, 10 000 Pa HyperForce",
+                    "image_url": "https://m.media-amazon.com/images/I/7162dbcZW3L._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/roborock-Q7-M5-Anti-Tangle-APP-Controlled/dp/B0DSJ93KPD?tag=pilotmyhome-20",
+                    "motivation": "Our time is a precious gift from God. By being good stewards of our minutes and automating the mundane, we reclaim time not for idleness, but for purpose: for family, for prayer, and for serving others with renewed energy."
+                },
+                {
+                    "title": "Instant Pot Duo Crisp 11‑in‑1 Air Fryer & Pressure Cooker, 6 Qt",
+                    "image_url": "https://m.media-amazon.com/images/I/81vc3qXKPpL._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Instant-Pot-Multi-Use-Pressure-Cooker/dp/B08WCLJ7JG?tag=pilotmyhome-20",
+                    "motivation": "Breaking bread together is a sacred act. By simplifying the preparation of meals, we reduce stress and create more opportunity for meaningful conversation and connection around the dinner table, the heart of the home."
+                },
+                {
+                    "title": "Amazon Echo Dot (5th Gen, 2022 Release) Glacier White",
+                    "image_url": "https://m.media-amazon.com/images/I/7116ea3BmTL._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Amazon-release-vibrant-helpful-routines/dp/B09B94RL1R?tag=pilotmyhome-20",
+                    "motivation": "The book of Proverbs speaks of the power of a timely word. Use this helper to fill your home with worship music, listen to the Word of God, or set reminders for prayer, intentionally inviting His presence into your daily rhythm."
+                },
+            ],
+        },
+        {
+            "id": "robotics",
+            "title": "The Kingdom is Here: A Guide to Advanced Home Robotics",
+            "description": "From autonomous housekeepers to companion bots and automated landscapers, discover how robotics can serve your home.",
+            "icon": "robot",
+            "products": [
+                {
+                    "title": "Roborock S8 MaxV Ultra",
+                    "image_url": "https://m.media-amazon.com/images/I/712iLYEEb3L._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/roborock-S8-MaxV-Ultra-Self-Drying/dp/B0CQLPNB2X?tag=pilotmyhome-20",
+                    "motivation": "The Kingdom of God is one of peace and order. By delegating the constant task of maintaining a clean foundation for our home, we act as wise stewards of our God-given energy, focusing less on the dust of the world and more on cultivating a sanctuary of peace.",
+                    "category": "housekeeper" # category preserved for internal filtering if needed, though less critical now
+                },
+                {
+                    "title": "ECOVACS DEEBOT T50 PRO Omni Robot Vacuum and Mop, 3.19",
+                    "image_url": "https://m.media-amazon.com/images/I/610I+9D8U6L._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/ECOVACS-T50-PRO-Ultra-Slim-Self-Emptying/dp/B0DSB92P1N?tag=pilotmyhome-20",
+                    "motivation": "A well-ordered home that is ready to welcome others is an act of hospitality and love. Automating the core of our home's cleanliness prepares our hearts and our space to be present for fellowship, unburdened by the stress of pending chores.",
+                    "category": "housekeeper"
+                },
+                {
+                    "title": "eufy Robot Vacuum Omni C20",
+                    "image_url": "https://m.media-amazon.com/images/I/7162dbcZW3L._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/eufy-Emptying-hands-free-3-35-Inch-Ultra-Slim/dp/B0DCFNZF32?tag=pilotmyhome-20",
+                    "motivation": "'Whatever you do, work at it with all your heart, as working for the Lord' (Colossians 3:23). Using intelligent tools to maintain our homes with excellence is a modern way to honor this principle, serving our family with diligence.",
+                    "category": "housekeeper"
+                },
+                {
+                    "title": "Amazon Astro",
+                    "image_url": "https://m.media-amazon.com/images/I/61fPLtmoSNL._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/introducing-amazon-astro-household-robot-with-intelligent-motion/dp/B078NS8H82?tag=pilotmyhome-20",
+                    "motivation": "A 'helper' is a deeply biblical concept. This automaton can act as a central hub, a tireless helper that assists in managing daily tasks, connecting with loved ones, and guarding the home—a modern tool for a well-managed household.",
+                    "category": "companion"
+                },
+                {
+                    "title": "Enabot Home Security Camera",
+                    "image_url": "https://m.media-amazon.com/images/I/619BkgEoP1L._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Enabot-Security-Wireless-Self-Charging-Detection/dp/B09R6V3CJM?tag=pilotmyhome-20",
+                    "motivation": "The fifth commandment instructs us to honor our parents. Technology can be a bridge for compassionate care, allowing us to lovingly watch over elderly family members and fulfill our duty of care with peace of mind.",
+                    "category": "companion"
+                },
+                {
+                    "title": "Loona: The Smart Robot Pet",
+                    "image_url": "https://m.media-amazon.com/images/I/71D9dLT8xfL._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Loona-ChatGPT-4o-AI-Powered-Interaction-Monitoring/dp/B0DCF53PCH?tag=pilotmyhome-20",
+                    "motivation": "God's creation is filled with joy and personality. A robotic pet can be a source of innocent joy and laughter, reminding us of the importance of play and lighthearted connection in a loving home.",
+                    "category": "companion"
+                },
+                {
+                    "title": "Husqvarna Automower 415X Robotic Lawn Mower",
+                    "image_url": "https://m.media-amazon.com/images/I/61YL4bgni8L._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Husqvarna-Navigation-Installation-Ultra-Quiet-Technology/dp/B09WNDLXJL?tag=pilotmyhome-20",
+                    "motivation": "From Eden, humanity was tasked with tending creation. Automating the care of our property is an act of modern stewardship, creating a well-ordered space for our families to enjoy and for offering hospitality to others.",
+                    "category": "landscaper"
+                },
+                {
+                    "title": "Segway Navimow H-Series",
+                    "image_url": "https://m.media-amazon.com/images/I/61EDud-50eL._AC_SL1500_.jpg",
+                    "affiliate_link": "https://www.amazon.com/i105N-Perimeter-AI-Assisted-Multi-Zone-Management/dp/B0CX8LL2PC?tag=pilotmyhome-20",
+                    "motivation": "'Let all things be done decently and in order' (1 Corinthians 14:40). Applying this principle to our homes creates an external environment that reflects inner peace. Precise, automated tools help achieve this order, freeing our time for higher callings.",
+                    "category": "landscaper"
+                },
+            ],
+        },
+        {
+            "id": "digital_media",
+            "title": "Faith in Focus: A Guide to Digital Media for Spiritual Growth",
+            "description": "Utilize digital resources to deepen your understanding of scripture, enrich your prayer life, and cultivate spiritual discipline.",
+            "icon": "book-open",
+            "products": [
+                {
+                    "title": "NIV Study Bible, Fully Revised Edition",
+                    "image_url": "https://m.media-amazon.com/images/I/61X-21r-RzL._SY450_.jpg",
+                    "affiliate_link": "https://www.amazon.com/NIV-Study-Bible-Fully-Revised/dp/0310450378?tag=pilotmyhome-20",
+                    "motivation": "The Word of God is a lamp to our feet and a light to our path. A study Bible provides invaluable insights, commentaries, and resources to deepen your understanding and application of Scripture in daily life."
+                },
+                {
+                    "title": "My Prayer Journal: A Guided Christian Journal",
+                    "image_url": "https://m.media-amazon.com/images/I/71u9+54m0PL._SY450_.jpg",
+                    "affiliate_link": "https://www.amazon.com/My-Prayer-Journal-Guided-Christian/dp/1523507548?tag=pilotmyhome-20",
+                    "motivation": "Journaling your prayers and reflections can transform your spiritual walk. It allows you to track God's faithfulness, express your heart, and grow in gratitude as you witness His answers and guidance over time."
+                },
+                {
+                    "title": "Mere Christianity by C.S. Lewis",
+                    "image_url": "https://m.media-amazon.com/images/I/8106xK01u7L._SY450_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Mere-Christianity-C-S-Lewis/dp/0060652926?tag=pilotmyhome-20",
+                    "motivation": "Good books can sharpen our minds and deepen our faith. This classic work offers a clear and compelling defense of Christian belief, encouraging thoughtful engagement with foundational truths."
+                },
+                {
+                    "title": "Emotionally Healthy Spirituality by Peter Scazzero",
+                    "image_url": "https://m.media-amazon.com/images/I/718yG7y-0YL._SY450_.jpg",
+                    "affiliate_link": "https://www.amazon.com/Emotionally-Healthy-Spirituality-Ignored-Transform/dp/0310342223?tag=pilotmyhome-20",
+                    "motivation": "True spiritual growth encompasses our whole being. This guide offers practical steps to integrate emotional health with spiritual maturity, fostering deeper relationships with God and others."
+                },
+            ],
+        },
     ]
 
     verse: str = "Loading daily verse..."
     email: str = ""
     subscribed: bool = False
-
-    @rx.var
-    def housekeeper_products(self) -> List[Dict[str, str]]:
-        return [p for p in self.guide_products["robotics"] if p["category"] == "housekeeper"]
-
-    @rx.var
-    def companion_products(self) -> List[Dict[str, str]]:
-        return [p for p in self.guide_products["robotics"] if p["category"] == "companion"]
-
-    @rx.var
-    def landscaper_products(self) -> List[Dict[str, str]]:
-        return [p for p in self.guide_products["robotics"] if p["category"] == "landscaper"]
+    sidebar_expanded: bool = False
 
     async def fetch_verse(self):
         """Fetch the Verse of the Day from API.Bible."""
@@ -246,7 +299,6 @@ class State(rx.State):
                         data = await resp.json()
                         passage = data["data"]["passages"][0]
                         self.verse = f"{passage['content']} - {passage['reference']}"
-                        # Handle FUMS if needed (e.g., log or send request)
                     else:
                         self.verse = "For God so loved the world... - John 3:16 (Fallback)"
         except Exception:
@@ -257,8 +309,8 @@ class State(rx.State):
         self.email = form_data["email"]
         self.subscribed = True
 
-    def scroll_guide(self, delta: int):
-        return rx.window().eval(f'document.getElementById("guide_scroll").scrollBy(0, {delta})')
+    def toggle_sidebar(self):
+        self.sidebar_expanded = not self.sidebar_expanded
 
 # -----------------------------------------------------------------------------
 # Reusable Components
@@ -308,20 +360,29 @@ def product_card(product: dict) -> rx.Component:
         }
     )
 
-def hub_section(title: str, text_content: str, products: list[dict]) -> rx.Component:
-    """Render a hub section with title, text, and product cards."""
-    return rx.vstack(
-        rx.heading(title, size="7"),
-        rx.text(text_content, max_width="600px",
-                text_align="center", color="var(--gray-11)"),
-        rx.flex(
-            rx.foreach(products, product_card),
-            spacing="5", padding_y="2em",
-            wrap="wrap", justify="center",
-            align_items="stretch", 
+def flr_callout() -> rx.Component:
+    """Creative callout for Family Life Radio endorsement."""
+    return rx.callout(
+        rx.vstack(
+            rx.text(
+                "As we pray 'Thy Kingdom come, Thy will be done on Earth as in Heaven,' my wife and I endorse Family Life Radio as a God-provided source to honor Jesus together in worship tuning sessions anytime. Join us in this active prayer by tuning in or supporting their ministry.",
+                text_align="center", size="3", color="var(--gray-11)",
+            ),
+            rx.hstack(
+                rx.link(rx.button("Tune In Now", variant="outline"), href="https://www.myflr.org/", is_external=True),
+                rx.link(rx.button("Donate", variant="outline"), href="https://www.myflr.org/membership/", is_external=True),
+                spacing="3",
+            ),
+            spacing="3",
+            align="center",
         ),
-        spacing="4", align="center",
-        width="100%", padding_y="3em"
+        icon="heart",
+        color_scheme="amber",
+        variant="surface",
+        high_contrast=True,
+        padding="1em",
+        border_radius="md",
+        max_width="600px",
     )
 
 def footer() -> rx.Component:
@@ -329,7 +390,7 @@ def footer() -> rx.Component:
     return rx.vstack(
         rx.hstack(
             rx.link("Home", href="/"),
-            rx.link("Guides", href="/guides"),
+            rx.link("Guides", href="/guides"), # This page will change to a simple listing for now
             rx.link("About Us", href="/about"),
             spacing="5",
         ),
@@ -356,68 +417,151 @@ def footer() -> rx.Component:
         background_color="var(--gray-2)"
     )
 
-def base_layout(child: rx.Component) -> rx.Component:
-    """Base layout wrapping content with footer."""
-    return rx.vstack(child, footer(), spacing="0", align="center")
-
-def flr_callout() -> rx.Component:
-    """Creative callout for Family Life Radio endorsement."""
-    return rx.callout(
-        rx.vstack(
-            rx.text(
-                "As we pray 'Thy Kingdom come, Thy will be done on Earth as in Heaven,' my wife and I endorse Family Life Radio as a God-provided source to honor Jesus together in worship tuning sessions anytime. Join us in this active prayer by tuning in or supporting their ministry.",
-                text_align="center", size="3", color="var(--gray-11)",
-            ),
-            rx.hstack(
-                rx.link(rx.button("Tune In Now", variant="outline"), href="https://www.myflr.org/", is_external=True),
-                rx.link(rx.button("Donate", variant="outline"), href="https://www.myflr.org/membership/", is_external=True),
-                spacing="3",
-            ),
-            spacing="3",
-            align="center",
-        ),
-        icon="heart",
-        color_scheme="amber",
-        variant="surface",
-        high_contrast=True,
-        padding="1em",
-        border_radius="md",
-        max_width="600px",
-    )
-
-def tweet_card(guide: Dict[str, str]) -> rx.Component:
-    """Render a guide link styled as an X.com post."""
+def guide_post_card(guide_dict: Dict[str, any]) -> rx.Component:
+    """Render a full guide as a "post" on the main feed."""
     return rx.box(
-        rx.hstack(
-            rx.avatar(fallback="PMH", size="3", variant="soft"),
-            rx.vstack(
-                rx.hstack(
-                    rx.text("Pilot My Home", font_weight="bold", size="3"),
-                    rx.text("@pilotmyhome", color="gray", size="2"),
-                    rx.text("· 1d", color="gray", size="2"),
-                    spacing="2",
+        rx.vstack(
+            rx.hstack(
+                rx.avatar(fallback="PMH", size="3", variant="soft"),
+                rx.vstack(
+                    rx.hstack(
+                        rx.text("Pilot My Home", font_weight="bold", size="3"),
+                        rx.text("@pilotmyhome", color="gray", size="2"),
+                        rx.text(f"· {datetime.now().strftime('%b %d')}", color="gray", size="2"),
+                        spacing="2",
+                    ),
+                    rx.text(guide_dict["title"], size="4", font_weight="medium"),
+                    rx.text(guide_dict["description"], size="3", color="var(--gray-11)"),
+                    rx.flex(
+                        rx.foreach(guide_dict["products"], product_card), # Now directly access products
+                        spacing="5", padding_y="1em",
+                        wrap="wrap", justify="center",
+                        align_items="stretch",
+                    ),
+                    rx.hstack( # Social icons for post
+                        rx.icon(tag="message-circle", size=16, color="gray"),
+                        rx.text("0", color="gray", size="2"),
+                        rx.icon(tag="repeat", size=16, color="gray"),
+                        rx.text("0", color="gray", size="2"),
+                        rx.icon(tag="heart", size=16, color="gray"),
+                        rx.text("0", color="gray", size="2"),
+                        rx.icon(tag="share", size=16, color="gray"),
+                        spacing="4",
+                        padding_top="0.5em",
+                    ),
+                    spacing="1",
+                    width="100%",
                 ),
-                rx.text(guide["title"], size="4"),
-                rx.link("Read the guide", href=guide["link"], color="blue", size="3"),
-                rx.hstack(
-                    rx.icon(tag="message-circle", size=16, color="gray"),
-                    rx.text("0", color="gray", size="2"),
-                    rx.icon(tag="repeat", size=16, color="gray"),
-                    rx.text("0", color="gray", size="2"),
-                    rx.icon(tag="heart", size=16, color="gray"),
-                    rx.text("0", color="gray", size="2"),
-                    rx.icon(tag="share", size=16, color="gray"),
-                    spacing="4",
-                ),
-                spacing="1",
-                width="100%",
+                spacing="3",
+                align="start",
             ),
-            spacing="3",
-            align="start",
         ),
         border_bottom="1px solid var(--gray-4)",
         padding="1em",
         width="100%",
+        max_width="700px", # Constrain width for a tweet-like feed
+        background="white",
+    )
+
+def x_sidebar() -> rx.Component:
+    """X.com style left sidebar."""
+    link_style = {
+        "padding_x": "1em",
+        "padding_y": "0.7em",
+        "border_radius": "full",
+        "_hover": {"background_color": "var(--gray-3)"},
+        "width": "100%",
+        "display": "flex",
+        "align_items": "center",
+        "gap": "1em",
+    }
+    
+    # Filter out special "home_main" guide if it shouldn't appear in sidebar
+    sidebar_guides = [g for g in State.guides_data if g["id"] != "home_main"]
+
+    return rx.vstack(
+        rx.link(
+            rx.hstack(
+                rx.icon(tag="home", size=24),
+                rx.cond(State.sidebar_expanded, rx.text("Home", font_weight="bold", size="4")),
+                align_items="center",
+                width="100%",
+            ),
+            href="/",
+            style=link_style,
+        ),
+        rx.foreach(
+            sidebar_guides,
+            lambda guide: rx.link(
+                rx.hstack(
+                    rx.icon(tag=guide["icon"], size=24), # Use dynamic icon
+                    rx.cond(State.sidebar_expanded, rx.text(guide["title"], size="4")),
+                    align_items="center",
+                    width="100%",
+                ),
+                href=f"/guides/{guide['id'].replace('_', '-')}", # Generate path based on ID
+                style=link_style,
+            )
+        ),
+        rx.link(
+            rx.hstack(
+                rx.icon(tag="info", size=24),
+                rx.cond(State.sidebar_expanded, rx.text("About Us", size="4")),
+                align_items="center",
+                width="100%",
+            ),
+            href="/about",
+            style=link_style,
+        ),
+        rx.spacer(), # Pushes items to top
+        rx.link( # A button like the Tweet button
+            rx.button(
+                rx.cond(State.sidebar_expanded, "Subscribe", rx.icon(tag="mail")),
+                size="3",
+                width="100%",
+                variant="solid",
+                color_scheme="blue",
+            ),
+            href="#footer_subscribe", # Link to the subscribe form in footer
+            is_external=False, # Internal link
+        ),
+        width=rx.cond(State.sidebar_expanded, "250px", "60px"), # Dynamic width
+        min_height="100vh",
+        padding="1em",
+        border_right="1px solid var(--gray-4)",
+        align_items="flex-start",
+        position="sticky",
+        top="0",
+        on_mouse_enter=State.toggle_sidebar,
+        on_mouse_leave=State.toggle_sidebar,
+        transition="width 0.3s ease-in-out", # Smooth transition
+        z_index="100", # Ensure it stays on top
+        background="white",
+    )
+
+def base_layout_x_style(child: rx.Component) -> rx.Component:
+    """Base layout wrapping content with X.com style sidebar and footer."""
+    return rx.vstack(
+        rx.hstack(
+            x_sidebar(), # Left Sidebar
+            rx.vstack( # Main content area
+                child,
+                rx.box(id="footer_subscribe"), # Anchor for subscribe button
+                footer(),
+                spacing="0",
+                width="100%",
+                max_width="700px", # Content column width
+                border_x="1px solid var(--gray-4)", # Border for content column
+                min_height="100vh",
+            ),
+            spacing="0",
+            align_items="flex-start", # Align sidebar and main content at top
+            width="100%",
+            justify="center", # Center the main content column
+        ),
+        width="100vw",
+        min_height="100vh",
+        spacing="0",
     )
 
 # -----------------------------------------------------------------------------
@@ -430,125 +574,82 @@ def tweet_card(guide: Dict[str, str]) -> rx.Component:
     on_load=State.fetch_verse,
 )
 def index() -> rx.Component:
-    """Home page with hero, mission, and daily verse."""
-    return base_layout(
+    """Home page with a feed of all guide entities as posts."""
+    return base_layout_x_style(
         rx.vstack(
-            # Hero Section
-            rx.box(
-                rx.vstack(
-                    rx.heading("Pilot Your Home Towards Abundance",
-                               size="9", color="white"),
-                    rx.text(
-                        "Guiding Christian families to live more peacefully and intentionally with today's technology.",
-                        size="5", color="white"),
-                    rx.box(
-                        rx.scroll_area(
-                            rx.vstack(
-                                rx.foreach(State.guides, tweet_card),
-                                spacing="0",
-                            ),
-                            id="guide_scroll",
-                            scrollbars="vertical",
-                        ),
-                        rx.icon(
-                            tag="chevron_up",
-                            size=20,
-                            on_click=lambda: State.scroll_guide(-150),
-                            style={
-                                "position": "absolute",
-                                "top": "10px",
-                                "right": "10px",
-                                "opacity": 0.5,
-                                "cursor": "pointer",
-                                "color": "var(--gray-11)",
-                            },
-                        ),
-                        rx.icon(
-                            tag="chevron_down",
-                            size=20,
-                            on_click=lambda: State.scroll_guide(150),
-                            style={
-                                "position": "absolute",
-                                "bottom": "10px",
-                                "right": "10px",
-                                "opacity": 0.5,
-                                "cursor": "pointer",
-                                "color": "var(--gray-11)",
-                            },
-                        ),
-                        style=dict(
-                            height="400px",
-                            width="100%",
-                            max_width="600px",
-                            border="1px solid var(--gray-6)",
-                            border_radius="md",
-                            overflow="hidden",
-                            position="relative",
-                            background="white",
-                        ),
-                        margin_top="1em",
-                    ),
-                    align="center", 
-                    justify="center", 
-                    text_align="center",
-                    spacing="5", 
-                    padding="2em", 
-                    height="100%",
-                ),
-                background_image=(
-                    "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), "
-                    "url('https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=2940&auto=format&fit=crop')"
-                ),
-                background_size="cover", 
-                background_position="center",
-                width="100%", 
-                height="50vh",
+            rx.hstack(
+                rx.avatar(fallback="PMH", size="4"),
+                rx.heading("Home", size="7", margin_left="1em"),
+                width="100%",
+                padding="1em",
+                border_bottom="1px solid var(--gray-4)",
+                position="sticky", # Keep header visible when scrolling feed
+                top="0",
+                background="white",
+                z_index="10",
             ),
-
-            # Mission Section
             rx.vstack(
-                rx.heading("Faith, Family, and the Thoughtful Home", size="7"),
-                rx.text(
-                    "Welcome to Pilot My Home. We believe technology shouldn't complicate life, but enrich it. We're here to help you navigate the world of smart home tech to create more time for what truly matters: your family and your faith. Let's build a home of peace and purpose, together.",
-                    max_width="700px", text_align="center"
+                # Iterate through all guide entities and display them as posts
+                # The "home_main" guide can act as the initial "hero" post
+                rx.foreach(
+                    State.guides_data,
+                    lambda guide: guide_post_card(guide),
                 ),
-                padding_y="3em", align="center", spacing="4",
+                # Daily Verse and FLR Callout can be inserted as special "posts"
+                # or styled differently if preferred, here they are standard posts.
+                guide_post_card(
+                    {
+                        "id": "daily_verse_post",
+                        "title": "Daily Scripture for Your Home",
+                        "description": State.verse,
+                        "products": [] # No products for verse
+                    }
+                ),
+                guide_post_card(
+                    {
+                        "id": "flr_callout_post",
+                        "title": "Partnering with Family Life Radio",
+                        "description": "We endorse Family Life Radio as a God-provided source to honor Jesus together in worship tuning sessions anytime. Join us in this active prayer by tuning in or supporting their ministry.",
+                        "products": [], # No products for callout
+                    }
+                ),
+                spacing="0", # No extra spacing between posts
+                width="100%",
+                align_items="center",
             ),
-            # Daily Verse with FLR Callout
-            rx.vstack(
-                rx.heading("Daily Verse", size="6"),
-                rx.text(State.verse, max_width="700px", text_align="center", font_style="italic"),
-                flr_callout(),  # Added creative callout here for visibility
-                padding_y="2em", align="center", spacing="4",
-            ),
-            spacing="0", width="100%", align="center",
+            width="100%",
+            spacing="0",
         )
     )
 
-
+# The /guides page will now simply redirect or be simplified, as all guides are on the main feed
 @rx.page(
     route="/guides", 
     title="Guides | Pilot My Home",
     meta=[{"name": "description", "content": "In-depth Christian guides to thoughtful smart home technology."}],
 )
 def guides() -> rx.Component:
-    """Guides listing page."""
-    return base_layout(
+    """Guides listing page - now a redirect or a simple overview."""
+    return base_layout_x_style(
         rx.vstack(
-            rx.heading("Our Guides", size="8"),
-            rx.text("In-depth resources to help you build a more thoughtful home."),
-            rx.link("A Guide to a Peaceful Home", href="/guides/peaceful-home"),
-            rx.link("A Guide to a Connected Family", href="/guides/connected-family"),
-            rx.link("A Guide to an Abundant Kitchen", href="/guides/abundant-kitchen"),
-            rx.link("A Guide to a Spirit-Led Ambiance", href="/guides/spirit-led-ambiance"),
-            rx.link("A Christian Family's Guide to Home Security & Peace of Mind", href="/guides/security"),
-            rx.link("Good Stewardship of Time: A Guide", href="/guides/stewardship"),
-            rx.link("The Kingdom is Here: A Guide to Advanced Home Robotics", href="/guides/robotics"),
+            rx.heading("Explore All Our Guides", size="8"),
+            rx.text("All our guides are now featured directly on the home page feed for easy discovery.", text_align="center"),
+            rx.link(rx.button("Go to Home Feed", size="3"), href="/"),
             spacing="5", padding="4em", align="center"
         )
     )
 
-# --- GUIDE PAGES ---
+# --- INDIVIDUAL GUIDE PAGES ---
+# These pages will now dynamically render based on the 'guides_data'
+# The `product_hubs` and `guide_products` are removed from State,
+# so direct access to guide_dict["products"] is used.
+
+# Helper to get guide data by ID for individual pages
+def get_guide_by_id(guide_id: str) -> Dict[str, any]:
+    for guide in State.guides_data:
+        if guide["id"] == guide_id:
+            return guide
+    return {"id": "404", "title": "Guide Not Found", "description": "The requested guide could not be found.", "products": []}
 
 @rx.page(
     route="/guides/peaceful-home", 
@@ -556,11 +657,18 @@ def guides() -> rx.Component:
     meta=[{"name": "description", "content": "Christian guide to creating a peaceful smart home."}],
 )
 def guide_peaceful_home() -> rx.Component:
-    return base_layout(
-        hub_section(
-            "A Guide to a Peaceful Home",
-            "Create a sanctuary of calm and security. These tools help protect your home and automate daily tasks, giving you priceless peace of mind.",
-            State.product_hubs["peaceful_home"],
+    guide = get_guide_by_id("peaceful_home")
+    return base_layout_x_style(
+        rx.vstack(
+            rx.heading(guide["title"], size="8"),
+            rx.text(guide["description"]),
+            rx.flex(
+                rx.foreach(guide["products"], product_card),
+                spacing="5", padding_y="2em",
+                wrap="wrap", justify="center",
+                align_items="stretch", 
+            ),
+            padding="2em", max_width="900px", width="100%",
         )
     )
 
@@ -570,11 +678,18 @@ def guide_peaceful_home() -> rx.Component:
     meta=[{"name": "description", "content": "Use technology to strengthen family bonds in Christ."}],
 )
 def guide_connected_family() -> rx.Component:
-    return base_layout(
-        hub_section(
-            "A Guide to a Connected Family",
-            "In a world of digital distraction, use technology to bring your family closer together. These picks are designed for shared experiences.",
-            State.product_hubs["connected_family"],
+    guide = get_guide_by_id("connected_family")
+    return base_layout_x_style(
+        rx.vstack(
+            rx.heading(guide["title"], size="8"),
+            rx.text(guide["description"]),
+            rx.flex(
+                rx.foreach(guide["products"], product_card),
+                spacing="5", padding_y="2em",
+                wrap="wrap", justify="center",
+                align_items="stretch", 
+            ),
+            padding="2em", max_width="900px", width="100%",
         )
     )
 
@@ -584,11 +699,18 @@ def guide_connected_family() -> rx.Component:
     meta=[{"name": "description", "content": "Steward your kitchen with smart tools for family meals."}],
 )
 def guide_abundant_kitchen() -> rx.Component:
-    return base_layout(
-        hub_section(
-            "A Guide to an Abundant Kitchen",
-            "The kitchen is the heart of the home. Steward your resources well and simplify mealtime with technology that serves your family.",
-            State.product_hubs["abundant_kitchen"],
+    guide = get_guide_by_id("abundant_kitchen")
+    return base_layout_x_style(
+        rx.vstack(
+            rx.heading(guide["title"], size="8"),
+            rx.text(guide["description"]),
+            rx.flex(
+                rx.foreach(guide["products"], product_card),
+                spacing="5", padding_y="2em",
+                wrap="wrap", justify="center",
+                align_items="stretch", 
+            ),
+            padding="2em", max_width="900px", width="100%",
         )
     )
 
@@ -598,11 +720,18 @@ def guide_abundant_kitchen() -> rx.Component:
     meta=[{"name": "description", "content": "Create a home ambiance filled with God's presence."}],
 )
 def guide_spirit_led_ambiance() -> rx.Component:
-    return base_layout(
-        hub_section(
-            "A Guide to a Spirit-Led Ambiance",
-            "Invite the purity of God’s presence into your home with these scriptures, scents, and sacred décor items.",
-            State.product_hubs["spirit_ambiance"],
+    guide = get_guide_by_id("spirit_ambiance")
+    return base_layout_x_style(
+        rx.vstack(
+            rx.heading(guide["title"], size="8"),
+            rx.text(guide["description"]),
+            rx.flex(
+                rx.foreach(guide["products"], product_card),
+                spacing="5", padding_y="2em",
+                wrap="wrap", justify="center",
+                align_items="stretch", 
+            ),
+            padding="2em", max_width="900px", width="100%",
         )
     )
     
@@ -612,16 +741,15 @@ def guide_spirit_led_ambiance() -> rx.Component:
     meta=[{"name": "description", "content": "Christian family's guide to home security and peace."}],
 )
 def guide_security() -> rx.Component:
-    return base_layout(
+    guide = get_guide_by_id("security")
+    return base_layout_x_style(
         rx.vstack(
-            rx.heading("A Christian Family's Guide to Home Security",
-                       size="8", text_align="center"),
+            rx.heading(guide["title"], size="8", text_align="center"),
             rx.text(f"Published {datetime.now().strftime('%B %d, %Y')}", color="var(--gray-10)", text_align="center"),
             
             rx.vstack(
-                rx.text(
-                    "Our homes are our sanctuaries—a gift we are called to steward wisely. In today's world, that stewardship includes being thoughtful about security. When you Ask God to save you,  don't ignore His gift of Wisdom. This isn't about living in fear, but about creating an environment of peace and safety where your family can flourish. Modern technology, when chosen and used intentionally, can be a powerful tool in piloting a secure and peaceful home."
-                ),
+                rx.text(guide["description"]), # Use description from the data source
+                # Additional fixed text for the security guide (if still desired)
                 rx.heading("The Digital Welcome Mat: Video Doorbells", size="6", padding_top="1em"),
                 rx.text(
                     "The front door is the primary entry point to your home. A video doorbell acts as a digital gatekeeper, allowing you to see and speak with anyone who approaches, whether you're in the kitchen or away from home. This brings incredible peace of mind, from verifying a delivery to politely declining a solicitor without opening the door. It's a simple first step towards a more secure home."
@@ -639,9 +767,9 @@ def guide_security() -> rx.Component:
             ),
 
             rx.heading("Our Top Recommended Security Products",
-                       size="6", padding_top="2em"),
+                        size="6", padding_top="2em"),
             rx.flex(
-                rx.foreach(State.guide_products["security"], product_card),
+                rx.foreach(guide["products"], product_card),
                 spacing="5", padding_y="2em",
                 wrap="wrap", justify="center",
                 align_items="stretch",
@@ -656,15 +784,15 @@ def guide_security() -> rx.Component:
     meta=[{"name": "description", "content": "Guide to good stewardship of time with smart tech."}],
 )
 def guide_stewardship() -> rx.Component:
-    return base_layout(
+    guide = get_guide_by_id("stewardship")
+    return base_layout_x_style(
         rx.vstack(
-            rx.heading("A Guide to Good Stewardship of Your Time", size="8", text_align="center"),
+            rx.heading(guide["title"], size="8", text_align="center"),
             rx.text(f"Published {datetime.now().strftime('%B %d, %Y')}", color="var(--gray-10)", text_align="center"),
             
             rx.vstack(
-                rx.text(
-                    "Time is one of the most precious resources God has given us. As families striving to live intentionally, being good stewards of our time allows us to focus on what truly matters: our faith, our relationships, and our purpose. While technology can often feel like a distraction, it can also be a powerful ally in automating the mundane tasks of daily life, freeing up hours each week for more meaningful pursuits."
-                ),
+                rx.text(guide["description"]), # Use description from data source
+                # Additional fixed text for the stewardship guide (if still desired)
                 rx.heading("Automating the Home Base", size="6", padding_top="1em"),
                 rx.text(
                     "Think about the recurring chores that consume time every day. A robot vacuum, for example, can take over the daily task of sweeping floors, giving your family back 15-30 minutes each day. That's time that can be spent reading together, in prayer, or simply enjoying a moment of peace. Delegating these simple tasks to automation is a practical form of stewardship."
@@ -678,9 +806,9 @@ def guide_stewardship() -> rx.Component:
             ),
 
             rx.heading("Recommended Stewardship Tools",
-                       size="6", padding_top="2em"),
+                        size="6", padding_top="2em"),
             rx.flex(
-                rx.foreach(State.guide_products["stewardship"], product_card),
+                rx.foreach(guide["products"], product_card),
                 spacing="5", padding_y="2em",
                 wrap="wrap", justify="center",
                 align_items="stretch",
@@ -696,7 +824,7 @@ def guide_stewardship() -> rx.Component:
 )
 def about() -> rx.Component:
     """About page with mission and contact form."""
-    return base_layout(
+    return base_layout_x_style(
         rx.vstack(
             rx.heading("About Pilot My Home", size="8", text_align="center"),
             rx.vstack(
@@ -725,12 +853,21 @@ def about() -> rx.Component:
     meta=[{"name": "description", "content": "Guide to advanced home robotics for Christian stewardship."}],
 )
 def guide_robotics() -> rx.Component:
-    return base_layout(
+    guide = get_guide_by_id("robotics")
+    
+    # Filter robotics products by category for display on the dedicated guide page
+    housekeeper_products = [p for p in guide["products"] if p["category"] == "housekeeper"]
+    companion_products = [p for p in guide["products"] if p["category"] == "companion"]
+    landscaper_products = [p for p in guide["products"] if p["category"] == "landscaper"]
+
+    return base_layout_x_style(
         rx.vstack(
-            rx.heading("The Kingdom is Here: A Guide to Advanced Home Robotics", size="8", text_align="center"),
+            rx.heading(guide["title"], size="8", text_align="center"),
             rx.text(f"Published {datetime.now().strftime('%B %d, %Y')}", color="var(--gray-10)", text_align="center"),
 
             rx.vstack(
+                rx.text(guide["description"]), # Use description from data source
+
                 # Housekeeper Section
                 rx.heading("The Autonomous Housekeeper", size="7", padding_top="1.5em"),
                 rx.text(
@@ -738,10 +875,7 @@ def guide_robotics() -> rx.Component:
                     max_width="800px",
                 ),
                 rx.flex(
-                    rx.foreach(
-                        State.housekeeper_products,
-                        product_card
-                    ),
+                    rx.foreach(housekeeper_products, product_card),
                     spacing="5", padding_y="2em",
                     wrap="wrap", justify="center",
                     align_items="stretch",
@@ -754,10 +888,7 @@ def guide_robotics() -> rx.Component:
                     max_width="800px",
                 ),
                 rx.flex(
-                    rx.foreach(
-                        State.companion_products,
-                        product_card
-                    ),
+                    rx.foreach(companion_products, product_card),
                     spacing="5", padding_y="2em",
                     wrap="wrap", justify="center",
                     align_items="stretch",
@@ -770,10 +901,7 @@ def guide_robotics() -> rx.Component:
                     max_width="800px",
                 ),
                 rx.flex(
-                    rx.foreach(
-                        State.landscaper_products, 
-                        product_card
-                    ),
+                    rx.foreach(landscaper_products, product_card), 
                     spacing="5", padding_y="2em",
                     wrap="wrap", justify="center",
                     align_items="stretch",
@@ -788,6 +916,37 @@ def guide_robotics() -> rx.Component:
         )
     )
 
+@rx.page( # NEW DIGITAL MEDIA PAGE
+    route="/guides/digital-media", 
+    title="Faith in Focus: Digital Media | Pilot My Home",
+    meta=[{"name": "description", "content": "Guide to digital media for Christian spiritual growth."}],
+)
+def guide_digital_media() -> rx.Component:
+    guide = get_guide_by_id("digital_media")
+    return base_layout_x_style(
+        rx.vstack(
+            rx.heading(guide["title"], size="8", text_align="center"),
+            rx.text(f"Published {datetime.now().strftime('%B %d, %Y')}", color="var(--gray-10)", text_align="center"),
+            
+            rx.vstack(
+                rx.text(guide["description"]), # Use description from data source
+                spacing="4",
+                max_width="800px",
+            ),
+
+            rx.heading("Recommended Digital Media for Spiritual Growth",
+                        size="6", padding_top="2em"),
+            rx.flex(
+                rx.foreach(guide["products"], product_card),
+                spacing="5", padding_y="2em",
+                wrap="wrap", justify="center",
+                align_items="stretch",
+            ),
+            max_width="90%", padding="2em", spacing="4", align="center"
+        )
+    )
+
+
 # -----------------------------------------------------------------------------
 # App Initialization
 # -----------------------------------------------------------------------------
@@ -795,8 +954,8 @@ def guide_robotics() -> rx.Component:
 app = rx.App(
     theme=rx.theme(
         appearance="light",
-        accent_color="blue",  # Changed to blue to match X.com
+        accent_color="blue",
         radius="large",
     ),
-    style={"body": {"background": "white"}},
+    style={"body": {"background": "#F0F2F5"}}, # Light grey background like X.com
 )
