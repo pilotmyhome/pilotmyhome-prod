@@ -1,8 +1,7 @@
 import reflex as rx
 
-class PilotmyhomeConfig(rx.Config):
-    pass
-
-config = PilotmyhomeConfig(
+config = rx.Config(
     app_name="pilotmyhome",
+    db_url="sqlite:///reflex.db",
+    plugins=["reflex.plugins.sitemap.SitemapPlugin"],
 )
